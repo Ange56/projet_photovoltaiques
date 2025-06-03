@@ -1,4 +1,4 @@
-function request(callback,api,method){
+function request(callback,api,method,data=null){
 
     // Create XML HTTP request.
  let xhr = new XMLHttpRequest();

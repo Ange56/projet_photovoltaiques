@@ -12,12 +12,20 @@
     <div>
 
         Rechercher une Installation
-        <form>
-            <label for="selp">Panneau</label><select name="Panel" id="selp"></select>
-            <label for="seli">Onduleur</label><select name="Inverter" id="seli"></select>
-            <label for="seld">Département</label><select name="Department" id="seld"></select>
+        <form id="selection">
+            <label for="selp">Panneau</label><select name="Panel" id="selp">
+                <option id="any">any</option>
+            </select>
+            <label for="seli">Onduleur</label><select name="Inverter" id="seli">
+                <option id="any">any</option>
+            </select>
+            <label for="seld">Département</label><select name="Department" id="seld">
+                <option id="any">any</option>
+            </select>
+            <input type="submit">
         </form>
-        <table id="result">
+        <table id="listr">
+            <tr><td>Date d'installation</td><td>Nombre de panneaux</td><td>Surface</td><td>Puissance crête</td><td>Localisation</td></tr>
             
 
 
