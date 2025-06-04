@@ -1,4 +1,6 @@
-//addsboptions to a select
+///param select the select where the options are gonna be added
+///the options that are gonna be added
+///adds options to a select
 
 function addOpt(select,options){
     options.forEach(element => {
@@ -9,10 +11,12 @@ function addOpt(select,options){
 
 }
 
+///param result the elements that matches the query
+///lists the matching results
 function display(result){
     let list= getElementById("list");
     result.forEach(element=>{
-        list.innerHTML+="<tr><td>"+element['']+"/"+element['']+"/"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td></tr>"
+        list.innerHTML+="<tr><td>"+element['']+"/"+element['']+"/"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td></tr>"
 
     })
 
