@@ -22,7 +22,7 @@
 			    <div class="d-flex align-items-center">
 			        
                     <a href="../front/html/accueil.html">
-                        <img src="../images/logo/logo.png" alt="Logo" class="logo-img me-2">
+                        <img src="../images/logo.png" alt="Logo" class="logo-img me-2">
                     </a>
                     <span class="navbar-title">Panoneau</span>
 			    </div>
