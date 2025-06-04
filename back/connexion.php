@@ -32,8 +32,8 @@
 			    <div class="d-flex gap-2">
                     <a href="../front/html/accueil.html" class="nav-button">Accueil</a>
                     <a href="../front/html/recherche.html" class="nav-button">Recherche</a>
-                    <a href="#" class="nav-button">Carte</a>
-                    <a href="#" class="nav-button active">Connexion</a>
+                    <a href="../front/html/carte.html" class="nav-button">Carte</a>
+                    <a href="connexion.php" class="nav-button active">Connexion</a>
 			    </div>
 			</nav>
         </header>
