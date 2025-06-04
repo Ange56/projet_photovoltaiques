@@ -1,14 +1,18 @@
+<?php 
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <link href="../css/accueil.css" rel="stylesheet">
+        <link href="../front/css/connexion.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
 
         <!--<script src="script.js"></script>-->
-        <title> Accueil </title>
+        <title> Connexion </title>
     </head>
     <body>
         
@@ -17,8 +21,8 @@
 			  <!-- Gauche : logo + titre -->
 			    <div class="d-flex align-items-center">
 			        
-                    <a href="accueil.html">
-                        <img src="../../images/logo/logo.png" alt="Logo" class="logo-img me-2">
+                    <a href="../front/html/accueil.html">
+                        <img src="../images/logo/logo.png" alt="Logo" class="logo-img me-2">
                     </a>
                     <span class="navbar-title">Panoneau</span>
 			    </div>
@@ -26,46 +30,56 @@
                 
 			  <!-- Centre : boutons -->
 			    <div class="d-flex gap-2">
-                    <a href="accueil.html" class="nav-button active">Accueil</a>
-                    <a href="recherche.html" class="nav-button">Recherche</a>
+                    <a href="../front/html/accueil.html" class="nav-button">Accueil</a>
+                    <a href="../front/html/recherche.html" class="nav-button">Recherche</a>
                     <a href="#" class="nav-button">Carte</a>
-                    <a href="../../back/connexion.php" class="nav-button">Connexion</a>
+                    <a href="#" class="nav-button active">Connexion</a>
 			    </div>
 			</nav>
         </header>
 
+        <main class="main-content">
+            <div class="light_blue container">
+                <h1 class="text-center">Connectez-vous</h1>
 
-          
-
-         <main id="page">
-            <h1 id="a">Bienvenue chez Panoneau</h1>
-            
-            <!-- Section de présentation -->
-            <div class="presentation-section">
-                <p class="presentation-text">
-                    Nous concevons et développons une application innovante dédiée à la 
-                    gestion des installations photovoltaïques chez les particuliers.
-                </p>
-                
-                <p class="description-text">
-                    Cette application permettra d'afficher la liste complète des installations de 
-                    panneaux solaires, d'obtenir des statistiques détaillées sur leur 
-                    performance et leur impact, et de visualiser leur répartition géographique 
-                    sur une carte interactive. L'objectif est d'offrir aux utilisateurs un outil 
-                    simple, intuitif et puissant pour suivre, analyser et optimiser leurs 
-                    installations, tout en contribuant activement à la transition énergétique. 
-                    Vous avez aussi la possibilité de visualiser l'ensemble des données des 
-                    installations, ainsi que de saisir de nouvelles installations ou d'en modifier.
-                </p>
-            </div>
-
-            <!-- Section statistiques -->
-            <div class="stats-section">
-                <h2>Quelques statistiques</h2>
-                <!-- Ici vous pourrez ajouter votre graphique -->
-                <div class="chart-placeholder">
-                    [Graphique à intégrer]
+                <?php if (!empty($messageErreur)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= htmlspecialchars($messageErreur) ?>
                 </div>
+
+
+                <?php endif; ?>
+
+                <form class="formulaire d-flex flex-column align-items-center" action="../php/connexion_medecin.php" method="POST">
+                        
+                        <div class="mb-3 w-100">
+                            <label for="mail1" class="form-label">Saisissez votre adresse mail : *</label>
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mail" name="mail" placeholder="nom@mail.com" required>
+                                <label for="mail">nom@mail.com</label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 w-100">
+                            <label for="motdepasse" class="form-label">Saisissez votre mot de passe : *</label>
+                            <div class="form-text">
+                                Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un chiffre.
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="**********"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$"  required>
+                                <label for="motdepasse">**********</label>
+                            </div>
+                            
+                            <div class="mdp_oublie">
+                                <a href="../html/mot_passe.html">Mot de passe oublié ?</a>
+                            </div>
+                        </div>
+                    
+                    
+                    <div class="d-flex justify-content-center">
+                        <input class="btn dark_blue" type="submit" value="Se connecter">
+                    </div>
+                </form>
             </div>
         </main>
 
@@ -103,5 +117,6 @@
                 </div>
             </div>
         </footer>
+
     </body>
 </html>
