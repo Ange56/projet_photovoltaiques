@@ -9,6 +9,10 @@ function display(data){
     let adresseMenu = document.getElementById("adressem");
     let ondulateurMenu = document.getElementById("onduleurm");
 
+    let infodoc
+
+    infodoc.innerText+= data['']
+
     installationMenu.innerHTML+=
     "<tr><td>Date d'installation</td><td>"+data['']+"/"+data['']+"/"+data['']+"</td></tr>"+
     "<tr><td>Surface</td><td>"+data['']+"</td></tr>"+
@@ -58,6 +62,8 @@ window.addEventListener("load",function(){
 
     let id = urlParams.get('id')
 
+    let info= document.getElementById("info")
+
     let installationMenu = document.getElementById("installationm");
     let placementMenu = document.getElementById("placementm");
     let panneauMenu = document.getElementById("panneaum");
@@ -69,6 +75,8 @@ window.addEventListener("load",function(){
     let panneauButton = document.getElementById("panneaub");
     let adresseButton = document.getElementById("adresseb");
     let ondulateurButton = document.getElementById("onduleurb");
+
+    info.innerText+= id
 
     request(display,'../api/request.php/installations',"GET",id)
 

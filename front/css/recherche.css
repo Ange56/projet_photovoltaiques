@@ -63,7 +63,7 @@ td, tr, table {padding: 0.3rem; border-color:steelblue; border-style:  solid; bo
 select{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
 input{background-color:skyblue; border-radius: 10%; border: none; padding: 0.3rem}
 
-input:hover{background-color: steelblue;}
+input:hover{background-color: lightgray;}
 
 /* ------------ FOOTER -------------- */
 .footer-custom {
