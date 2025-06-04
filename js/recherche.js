@@ -1,3 +1,4 @@
+/*
 ///param select the select where the options are gonna be added
 ///the options that are gonna be added
 ///adds options to a select
@@ -46,5 +47,5 @@ let selectp=document.getElementById("selp");
     
 }
 
-
 )
+*/

@@ -1,0 +1,159 @@
+/* ------ NAVBAR ------ */
+
+.navbar-custom {
+  background-color: #06919b;
+  height: 80px;
+  width: 100%;
+  margin: 0;
+  padding: 0 40px; /* espace interne horizontal */
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1); /* effet subtil comme sur l'image */
+}
+
+
+.logo-img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+
+.navbar-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  color: white;
+}
+
+.nav-button {
+  padding: 10px 25px;
+  background-color: #bce9ee;
+  color: black;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+
+.nav-button:hover {
+  background-color: #22e7f5;
+  color: black;
+}
+
+.nav-button.active {
+  background-color: #22e7f5;
+}
+
+
+/* ------------BODY---------------*/
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/*--------------TABLE & FORM--------------*/
+
+td, tr, table {padding: 0.3rem; border-color:steelblue; border-style:  solid; border-width:  0.1rem;}
+
+select{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
+button{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
+
+button:hover{background-color: skyblue;}
+
+/* ------------ FOOTER -------------- */
+.footer-custom {
+  background-color: #06919b;
+  color: white;
+  padding: 20px 40px;
+  font-family: 'Roboto', sans-serif;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.footer-center {
+  flex: 0 0 auto;
+  text-align: center;
+  margin: 0 30px;
+}
+
+.footer-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.footer-name {
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+}
+
+.footer-group {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-year {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.linkedin-link {
+  color: #0077b5;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.linkedin-link:hover {
+  color: #005582;
+}
+
+.linkedin-link i {
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-left {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .presentation-section {
+    padding: 20px;
+  }
+  
+  .description-text {
+    text-align: left;
+  }
+  
+  #page {
+    padding: 20px 15px;
+  }
+}

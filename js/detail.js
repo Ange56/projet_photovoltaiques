@@ -1,3 +1,5 @@
+/*
+
 ///param data the details of an installation
 ///displays the details of an installation
 function display(data){
@@ -79,3 +81,5 @@ window.addEventListener("load",function(){
     
 
 })
+
+*/
