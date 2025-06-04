@@ -41,7 +41,7 @@ let selectp=document.getElementById("selp");
         request(addOpt,selectp,api,"GET")}
 
     let form=document.getElementById("selection")
-    form.addEventListener("submit",request(display,api,"GET"))
+    form.addEventListener("submit",request(display,'../api/request.php/installations',"GET"))
     
 }
 
