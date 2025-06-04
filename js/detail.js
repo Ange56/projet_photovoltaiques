@@ -1,32 +1,32 @@
 ///param data the details of an installation
 ///displays the details of an installation
 function display(data){
-    let installationm = document.getElementById("menui");
-    let placementm = document.getElementById("menupl");
-    let panneaum = document.getElementById("menupa");
-    let adressem = document.getElementById("menua");
-    let ondulateurm = document.getElementById("menuo");
+    let installationMenu = document.getElementById("installationm");
+    let placementMenu = document.getElementById("placementm");
+    let panneauMenu = document.getElementById("panneaum");
+    let adresseMenu = document.getElementById("adressem");
+    let ondulateurMenu = document.getElementById("onduleurm");
 
-    installationm.innerHTML+=
+    installationMenu.innerHTML+=
     "<tr><td>Date d'installation</td><td>"+data['']+"/"+data['']+"/"+data['']+"</td></tr>"+
     "<tr><td>Surface</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Puissance crete</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Localisation</td><td>"+data['']+"</td></tr>"
 
-    placementm.innerHTML+=
+    placementMenu.innerHTML+=
     "<tr><td>Orientation</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Orientation optimum</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Pente</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Pente optimum</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Installateur</td><td>"+data['']+"</td></tr>"+
-    "<tr><td></td>Production (PVGIS)<td>"+data['']+"</td></tr>"
+    "<tr><td>Production (PVGIS)</td><td>"+data['']+"</td></tr>"
 
-    panneaum.innerHTML+=
+    panneauMenu.innerHTML+=
     "<tr><td>Modèle</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Marque</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Nombre</td><td>"+data['']+"</td></tr>"
 
-    adressem.innerHTML+=
+    adresseMenu.innerHTML+=
     "<tr><td>Lattitude</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Longitude</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Localité</td><td>"+data['']+"</td></tr>"+
@@ -35,11 +35,10 @@ function display(data){
     "<tr><td>Pays</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Political</td><td>"+data['']+"</td></tr>"
 
-    ondulateurm.innerHTML+=
+    ondulateurMenu.innerHTML+=
     "<tr><td>Modèle</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Marque</td><td>"+data['']+"</td></tr>"+
     "<tr><td>Nombre</td><td>"+data['']+"</td></tr>"
-
 }
 
 ///param menu 
@@ -50,28 +49,33 @@ function toggle(menu){
 }
 
 
-///fetches the information to display and gives the buttons their functionality
+///fetches the information abotu the selected installation to display and gives the buttons their functionality
 window.addEventListener("load",function(){
-    let installationm = document.getElementById("menui");
-    let placementm = document.getElementById("menupl");
-    let panneaum = document.getElementById("menupa");
-    let adressem = document.getElementById("menua");
-    let ondulateurm = document.getElementById("menuo");
 
-    let installationb = document.getElementById("buttoni");
-    let placementb = document.getElementById("buttonpl");
-    let panneaub = document.getElementById("buttonpa");
-    let adresseb = document.getElementById("buttona");
-    let ondulateurb = document.getElementById("buttono");
+    let urlParams= new URLSearchParams(this.window.location.search);
 
-    request(display,'../api/request.php/installations',"GET",)
+    let id = urlParams.get('id')
+
+    let installationMenu = document.getElementById("installationm");
+    let placementMenu = document.getElementById("placementm");
+    let panneauMenu = document.getElementById("panneaum");
+    let adresseMenu = document.getElementById("adressem");
+    let ondulateurMenu = document.getElementById("onduleurm");
+
+    let installationButton = document.getElementById("installationb");
+    let placementButton = document.getElementById("placementb");
+    let panneauButton = document.getElementById("panneaub");
+    let adresseButton = document.getElementById("adresseb");
+    let ondulateurButton = document.getElementById("onduleurb");
+
+    request(display,'../api/request.php/installations',"GET",id)
 
 
-    installationb.onclick = toggle(installationm);
-    placementb.onclick = toggle(placementm);
-    adresseb.onclick = toggle(adressem);
-    panneaub.onclick = toggle(panneaum);
-    ondulateurb.onclick = toggle(ondulateurm);
+    installationButton.onclick = toggle(installationMenu);
+    placementButton.onclick = toggle(placementMenu);
+    adresseButton.onclick = toggle(adresseMenu);
+    panneauButton.onclick = toggle(panneauMenu);
+    ondulateurButton.onclick = toggle(ondulateurMenu);
     
 
 })

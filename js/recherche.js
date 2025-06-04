@@ -15,8 +15,9 @@ function addOpt(select,options){
 ///lists the matching results
 function display(result){
     let list= getElementById("list");
+       list.innerHTML+="<tr><td>Date d'installation</td><td>Nombre de panneaux</td><td>Surface</td><td>Puissance crête</td><td>Localisation</td><td><td>en savoir plus</td></tr>"
     result.forEach(element=>{
-        list.innerHTML+="<tr><td>"+element['']+"/"+element['']+"/"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td></tr>"
+        list.innerHTML+="<tr><td>"+element['']+"/"+element['']+"/"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td><a href='detail.html?id="+encodeURIComponent(element['id'])+"'></a></td></tr>"
 
     })
 
