@@ -1,111 +1,218 @@
+/* ------ NAVBAR ------ */
 
-/*-----------------------------header------------------------------------*/
-li {
-  list-style-type: none;
-
+.navbar-custom {
+  background-color: #06919b;
+  height: 80px;
+  width: 100%;
+  margin: 0;
+  padding: 0 40px; /* espace interne horizontal */
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1); /* effet subtil comme sur l'image */
 }
 
 
-/* Pour centrer la liste du milieu */
-#nav-center {
-  gap: 20px;
-}
-
-/* Optionnel : pour aligner verticalement le logo et le titre */
-.navbar .navbar-brand {
-  margin-bottom: 0;
-  
-}
-
-/* Optionnel : ajuster l'espace entre le logo et le titre */
-.navbar img {
+.logo-img {
+  height: 50px;
+  width: 50px;
   margin-right: 10px;
 }
 
 
-
-.navbar {
-  background-color: #06919b !important; 
-}
-
-.navbar-nav {
-  gap: 15px; /* Espace entre les boutons */
-}
-
-.navbar-brand {
-  font-size: 24px;
+.navbar-title {
   font-family: 'Roboto', sans-serif;
-  color: white !important;
-  
+  font-size: 28px;
+  color: white;
 }
 
-.nav-link {
+.nav-button {
+  padding: 10px 25px;
+  background-color: #bce9ee;
   color: black;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
   text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
-
-}
-
-.nav-link:hover {
-  background-color: #226e6e !important;
-  color: white !important;
-  box-sizing: border-box; /* S'assurer que la taille totale ne change pas */
-
 }
 
 
-.nav-link.active {
-  color: rgb(0, 0, 0) !important;
-  background-color: #22e7f5; /* Un vert plus intense */
-  border-radius: 5px;
-  text-decoration: none;
-  padding-top: 3px; /* Réduit la hauteur */
-  padding-bottom: 3px; /* Réduit la hauteur */
-  padding-left: 12px; /* Augmente la largeur */
-  padding-right: 12px; /* Augmente la largeur */
-} 
-
-.navbar .nav-item {
-  margin-right: 10px; /* Pour espacer un peu les items entre eux */
+.nav-button:hover {
+  background-color: #22e7f5;
+  color: black;
 }
-/*-------------------------------------------------------------------------------*/
 
-
-/*card*/
-
-h1{
-  text-align: center;
+.nav-button.active {
+  background-color: #22e7f5;
 }
 
 
-
-
-  #page {
-  display: grid;
-  grid-template-columns: 1fr 300px 80px 300px 1fr; /* Colonnes symétriques */
-  grid-template-rows: 180px auto; /* Ligne pour le texte et une pour les cartes */
-  gap: 30px; /* Espacement entre les éléments */
+/* ------------BODY---------------*/
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
-/*----------------placement des cartes-----------------*/
+body, html {
+  margin: 0;
+  padding: 0;
+}
 
+
+/* ---------------------------PAGE----------------------------*/
+#page {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 #a {
-  grid-column: 2 / 5; /* Centré horizontalement (2e à 4e colonne incluses) */
-  grid-row: 1; /* Placé sur la première ligne */
-  text-align: center; /* Centré horizontalement */
-  margin-top: 50px; /* Ajoute un espace au-dessus du texte */
+  text-align: center;
+  font-size: 2.5rem;
+  color: #06919b;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
-#b {
-  grid-column: 2; /* Placé dans la 2e colonne */
-  grid-row: 2; /* Sur la 2e ligne */
+/* Section de présentation */
+.presentation-section {
+  background-color: #e8e8e8;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 40px;
 }
 
-#c {
-  grid-column: 4; /* Placé dans la 4e colonne */
-  grid-row: 2; /* Sur la 2e ligne */
+.presentation-text {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
-/*--------------------------------------------------*/
+
+.description-text {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+  color: #555;
+  margin: 0;
+}
+
+/* Section statistiques */
+.stats-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.stats-section h2 {
+  font-size: 2rem;
+  color: #06919b;
+  margin-bottom: 30px;
+  text-decoration: underline;
+  text-decoration-color: #06919b;
+  text-underline-offset: 10px;
+}
+
+.chart-placeholder {
+  background-color: #f5f5f5;
+  border: 2px dashed #ccc;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #666;
+  border-radius: 10px;
+}
+
+/* ------------ FOOTER -------------- */
+.footer-custom {
+  background-color: #06919b;
+  color: white;
+  padding: 20px 40px;
+  font-family: 'Roboto', sans-serif;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.footer-center {
+  flex: 0 0 auto;
+  text-align: center;
+  margin: 0 30px;
+}
+
+.footer-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.footer-name {
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+}
+
+.footer-group {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-year {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.linkedin-link {
+  color: #0077b5;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.linkedin-link:hover {
+  color: #005582;
+}
+
+.linkedin-link i {
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-left {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .presentation-section {
+    padding: 20px;
+  }
+  
+  .description-text {
+    text-align: left;
+  }
+  
+  #page {
+    padding: 20px 15px;
+  }
+}
