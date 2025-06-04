@@ -16,7 +16,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannoneau - Administration</title>
+    <title>Pannoneau - Admin</title>
     <link rel="stylesheet" href="../front/css/accueil_admin.css">
 </head>
 <body>
@@ -25,7 +25,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
         <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
             <!-- Gauche : logo + titre -->
             <div class="d-flex align-items-center">
-                <a href="accueil.html">
+                <a href="accueil.php">
                     <img src="../images/logo.png" alt="Logo" class="logo-img me-2">
                 </a>
                 <span class="navbar-title">Panoneau</span>
@@ -33,15 +33,14 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
             <!-- Centre : boutons -->
             <div class="d-flex gap-2">
-                <a href="accueil.html" class="nav-button active">Accueil</a>
-                <a href="recherche.html" class="nav-button">Recherche</a>
-                <a href="carte.html" class="nav-button">Carte</a>
-                <a href="../../back/connexion.php" class="nav-button">Connexion</a>
+                <a href="accueil.php" class="nav-button active">Accueil</a>
+                <a href="#" class="nav-button">Recherche</a>
+                <a href="#" class="nav-button">Carte</a>
             </div>
 
             <!-- Droite : info admin (ajouté pour garder l'info admin) -->
             <div class="admin-info">
-                <span>Admin - <?php echo htmlspecialchars($admin_name); ?></span>
+                <span>Utilisateur - <?php echo htmlspecialchars($admin_name); ?></span>
                 <div class="user-avatar"><?php echo strtoupper(substr($admin_name, 0, 1)); ?></div>
             </div>
         </nav>
@@ -120,14 +119,12 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
                 <span class="close" id="btnCloseModal">&times;</span>
             </div>
             <form id="installationForm">
+                
+                <h3>Installations</h3>
                 <input type="hidden" id="installationId" value="">
                 <div class="form-group">
                     <label for="installDate">Date d'installation</label>
                     <input type="date" id="installDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="panelCount">Nombre de panneaux</label>
-                    <input type="number" id="panelCount" min="1" required>
                 </div>
                 <div class="form-group">
                     <label for="surface">Surface (m²)</label>
@@ -138,9 +135,93 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
                     <input type="number" id="power" min="0" step="0.1" required>
                 </div>
                 <div class="form-group">
-                    <label for="location">Localisation</label>
-                    <input type="text" id="location" required>
+                    <label for="localisation">Localisation</label>
+                    <input type="text" id="localisation" required>
                 </div>
+
+
+                <h3>Placement</h3>
+                <div class="form-group">
+                    <label for="orientation">Orientation</label>
+                    <input type="number" id="orientation" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="orientationOPT">Orientation Optimum</label>
+                    <input type="number" id="orientationOPT" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="pente">Pente</label>
+                    <input type="number" id="pente" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="penteOPT">Pente Optimum</label>
+                    <input type="number" id="penteOPT" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="installateur">Intallateur</label>
+                    <input type="text" id="installateur" required>
+                </div>
+                <div class="form-group">
+                    <label for="production">Production (PVGIS)</label>
+                    <input type="number" id="pente" min="1" required>
+                </div>
+                
+                <h3>Panneau</h3>
+                <div class="form-group">
+                    <label for="modele">Modèle</label>
+                    <input type="text" id="modele" required>
+                </div>
+                <div class="form-group">
+                    <label for="marque">Marque</label>
+                    <input type="text" id="marque" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre de panneaux</label>
+                    <input type="number" id="nombre" min="1" required>
+                </div>
+                
+                <h3>Adresse</h3>
+                <div class="form-group">
+                    <label for="lat">Lattitude</label>
+                    <input type="number" id="lat" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="long">Longitude</label>
+                    <input type="number" id="long" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="localite">Localité</label>
+                    <input type="number" id="localite" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="codePostal">Code Postal</label>
+                    <input type="number" id="codePostal" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="zoneAdm">Zone Administrative</label>
+                    <input type="text" id="zoneAdm" required>
+                </div>
+                <div class="form-group">
+                    <label for="pays">Pays</label>
+                    <input type="number" id="pays" min="1" required>
+                </div>
+                
+                <h3>Onduleur</h3>
+                <div class="form-group">
+                    <label for="modeleOnd">Modèle</label>
+                    <input type="text" id="modeleOnd" required>
+                </div>
+                <div class="form-group">
+                    <label for="marqueOnd">Marque</label>
+                    <input type="text" id="marqueOnd" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombreOnd">Nombre</label>
+                    <input type="text" id="nombreOnd" required>
+                </div>
+                
+
+
                 <div class="form-buttons">
                     <button type="button" class="btn-secondary" id="btnCancel">Annuler</button>
                     <button type="submit" class="add-btn" id="btnSubmit">Ajouter</button>
@@ -156,5 +237,42 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
     </div>
 
     <script src="accueil.js"></script>
+
+
+
+
+     <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="footer-content">
+            <!-- Gauche : Noms avec LinkedIn -->
+            <div class="footer-left">
+                <span class="footer-name">Tallulah DRENO-TABOT 
+                    <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/tallulah-dreno-tabot-9406842a3/">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </span>
+                <span class="footer-name">Angèle STUTZ 
+                    <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/ang%C3%A8le-stutz-2b76832a3/">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </span>
+                <span class="footer-name">Etienne DECAMPS 
+                    <a class="linkedin-link" target="_blank" href="#">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </span>
+            </div>
+
+            <!-- Centre : Groupe -->
+            <div class="footer-center">
+                <span class="footer-group">Groupe 11</span>
+            </div>
+
+            <!-- Droite : Année -->
+            <div class="footer-right">
+                <span class="footer-year">2025</span>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

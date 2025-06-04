@@ -89,6 +89,12 @@
     font-weight: bold;
 }
 
+#btnAddInstallation img {
+  width: 20px;  /* ou ce que tu veux */
+  height: 20px;
+  margin-right: 8px; /* pour espacer le texte si besoin */
+  vertical-align: middle; /* aligne bien avec le texte */
+}
 
 
 
@@ -449,4 +455,101 @@ body {
     .form-buttons {
         flex-direction: column;
     }
+}
+
+
+
+
+/* ------------ FOOTER -------------- */
+.footer-custom {
+  background-color: #06919b;
+  color: white;
+  padding: 20px 40px;
+  font-family: 'Roboto', sans-serif;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.footer-center {
+  flex: 0 0 auto;
+  text-align: center;
+  margin: 0 30px;
+}
+
+.footer-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.footer-name {
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+}
+
+.footer-group {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-year {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.linkedin-link {
+  color: #0077b5;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.linkedin-link:hover {
+  color: #005582;
+}
+
+.linkedin-link i {
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-left {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .presentation-section {
+    padding: 20px;
+  }
+  
+  .description-text {
+    text-align: left;
+  }
+  
+  #page {
+    padding: 20px 15px;
+  }
 }
