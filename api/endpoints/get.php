@@ -1,34 +1,92 @@
 <?php
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 header("Content-Type: application/json; charset=UTF-8");
 
-include_once __DIR__ . "/../config/database.php";
-include_once __DIR__ . "/../models/installation.php";
+require_once __DIR__ . '/../config/database.php';
 
-
-// Connexion à la base de données
 $database = new Database();
-$db = $database->getConnection();
+$pdo = $database->getConnection();
 
-// Création de l'objet Installation
-$installation = new Installation($db);
+$action = $_GET['action'] ?? 'all';
 
-// Récupération des données
-$stmt = $installation->readAll();
-$num = $stmt->rowCount();
+switch ($action) {
 
-if ($num > 0) {
-    $installations = [];
+    // Filtres pour le formulaire (année + département)
+    case 'filters':
+        $filters = [];
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $installations[] = $row;
-    }
+        $stmt1 = $pdo->query("
+            SELECT DISTINCT YEAR(an_installation) AS annee
+            FROM Installation
+            ORDER BY annee DESC
+            LIMIT 20
+        ");
+        $filters['annees'] = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($installations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-} else {
-    echo json_encode(["message" => "Aucune installation trouvée."]);
+        $stmt2 = $pdo->query("
+            SELECT code, nom
+            FROM Departement
+            ORDER BY RAND()
+            LIMIT 20
+        ");
+        $filters['departements'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($filters);
+        break;
+
+    // Installations géolocalisées filtrées pour la carte
+    case 'installations_map':
+        $annee = $_GET['annee'] ?? null;
+        $departement = $_GET['departement'] ?? null;
+
+        if (!$annee || !$departement) {
+            http_response_code(400);
+            echo json_encode(["error" => "Paramètres 'annee' et 'departement' requis."]);
+            exit;
+        }
+
+        $stmt = $pdo->prepare("
+            SELECT i.id, i.lat, i.`long`, i.puissance_crete, c.nom_standard AS localite
+            FROM Installation i
+            JOIN Communes c ON i.code_insee = c.code_insee
+            WHERE YEAR(i.an_installation) = :annee
+              AND c.code = :departement
+              AND i.lat IS NOT NULL AND i.`long` IS NOT NULL
+        ");
+        $stmt->execute(['annee' => $annee, 'departement' => $departement]);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+
+    //ç Détail d'une installation
+    case 'installation_detail':
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            http_response_code(400);
+            echo json_encode(["error" => "Paramètre 'id' requis."]);
+            exit;
+        }
+
+        $stmt = $pdo->prepare("
+            SELECT i.*, c.nom_standard AS localite
+            FROM Installation i
+            JOIN Communes c ON i.code_insee = c.code_insee
+            WHERE i.id = :id
+        ");
+        $stmt->execute(['id' => $id]);
+        echo json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+        break;
+
+    // Toutes les installations (ex : page accueil)
+    case 'all':
+    default:
+        $stmt = $pdo->query("
+            SELECT i.id, i.an_installation, i.puissance_crete, c.nom_standard AS localite
+            FROM Installation i
+            JOIN Communes c ON i.code_insee = c.code_insee
+            ORDER BY i.an_installation DESC
+            LIMIT 100
+        ");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
 }
-?>
