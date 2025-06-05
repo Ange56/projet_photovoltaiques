@@ -31,7 +31,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
             <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
                 <!-- Gauche : logo + titre -->
                 <div class="d-flex align-items-center">
-                    <a href="accueil.html">
+                    <a href="accueil.php">
                         <img src="../images/logo.png" alt="Logo" class="logo-img me-2">
                     </a>
                     <span class="navbar-title">Panoneau</span>
@@ -39,10 +39,9 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
                 <!-- Centre : boutons -->
                 <div class="d-flex gap-2">
-                    <a href="accueil.html" class="nav-button active">Accueil</a>
-                    <a href="recherche.html" class="nav-button">Recherche</a>
-                    <a href="carte.html" class="nav-button">Carte</a>
-                    <a href="../../back/connexion.php" class="nav-button">Connexion</a>
+                    <a href="accueil.php" class="nav-button active">Accueil</a>
+                    <a href="#" class="nav-button">Recherche</a>
+                    <a href="#" class="nav-button">Carte</a>
                 </div>
 
                 <!-- Droite : info admin (ajouté pour garder l'info admin) -->
