@@ -16,6 +16,10 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
+
         <title>Pannoneau - Administration</title>
         <link rel="stylesheet" href="../front/css/accueil_admin.css">
         <script src="accueil.js"></script>
@@ -158,37 +162,37 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
         </div>
 
         <!-- Footer -->
-            <footer class="footer-custom">
-                <div class="footer-content">
-                    <!-- Gauche : Noms avec LinkedIn -->
-                    <div class="footer-left">
-                        <span class="footer-name">Tallulah DRENO-TABOT 
-                            <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/tallulah-dreno-tabot-9406842a3/">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                        </span>
-                        <span class="footer-name">Angèle STUTZ 
-                            <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/ang%C3%A8le-stutz-2b76832a3/">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                        </span>
-                        <span class="footer-name">Etienne DECAMPS 
-                            <a class="linkedin-link" target="_blank" href="#">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <!-- Centre : Groupe -->
-                    <div class="footer-center">
-                        <span class="footer-group">Groupe 11</span>
-                    </div>
-
-                    <!-- Droite : Année -->
-                    <div class="footer-right">
-                        <span class="footer-year">2025</span>
-                    </div>
+        <footer class="footer-custom">
+            <div class="footer-content">
+                <!-- Gauche : Noms avec LinkedIn -->
+                <div class="footer-left">
+                    <span class="footer-name">Tallulah DRENO-TABOT 
+                        <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/tallulah-dreno-tabot-9406842a3/">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                    <span class="footer-name">Angèle STUTZ 
+                        <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/ang%C3%A8le-stutz-2b76832a3/">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                    <span class="footer-name">Etienne DECAMPS 
+                        <a class="linkedin-link" target="_blank" href="#">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
                 </div>
-            </footer>
+
+                <!-- Centre : Groupe -->
+                <div class="footer-center">
+                    <span class="footer-group">Groupe 11</span>
+                </div>
+
+                <!-- Droite : Année -->
+                <div class="footer-right">
+                    <span class="footer-year">2025</span>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>
