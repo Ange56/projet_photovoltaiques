@@ -1,4 +1,4 @@
-/*
+
 ///param select the select where the options are gonna be added
 ///the options that are gonna be added
 ///adds options to a select
@@ -18,7 +18,7 @@ function display(result){
     let list= getElementById("list");
        list.innerHTML+="<tr><td>Date d'installation</td><td>Nombre de panneaux</td><td>Surface</td><td>Puissance crête</td><td>Localisation</td><td><td>en savoir plus</td></tr>"
     result.forEach(element=>{
-        list.innerHTML+="<tr><td>"+element['']+"/"+element['']+"/"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td>"+element['']+"</td><td><a href='detail.html?id="+encodeURIComponent(element['id'])+"'></a></td></tr>"
+        list.innerHTML+="<tr><td>"+element['mois_installation']+"/"+element['an_installation']+"</td><td>"+element['nb_panneaux']+"</td><td>"+element['surface']+"</td><td>"+element['puissance_crete']+"</td><td>"+element['locality']+"</td><td>"+"</td><td><a href='detail.html?id="+encodeURIComponent(element['id'])+"'></a></td></tr>"
 
     })
 
@@ -27,25 +27,14 @@ function display(result){
 
 
 document.addEventListener("load", function(){
-let selecti=document.getElementById("seli");
-let selectd=document.getElementById("seld");
-let selectp=document.getElementById("selp");
+let selecti=document.getElementById("onduleurS");
+let selectd=document.getElementById("departementS");
+let selectp=document.getElementById("panneauS");
 
-    if(selecti){
-        request(addOpt,selecti,api,"GET")
-
-    }
-    if(selectd){
-        request(addOpt,selectd,api,"GET")
-
-    }
-    if(selectp){
-        request(addOpt,selectp,api,"GET")}
+    if(selecti && selectd && selectp){
+        request(addOpt,'../api/request.php/filtre',"GET")}
 
     let form=document.getElementById("selection")
-    form.addEventListener("submit",request(display,'../api/request.php/installations',"GET"))
-    
+    form.addEventListener("submit",request(display,'../api/request.php/liste',"GET")) 
 }
-
 )
-*/

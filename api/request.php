@@ -18,14 +18,29 @@
 
 
       if ($requestMethod === 'GET'){
-          $element = array_shift($request);
+          $id = array_shift($request);
 
-          // Polls request.
-          if ($requestRessource == 'installations')
+          
+          if ($requestRessource == 'installation')
           {
-                  $data = dbRequestTweets($db, $element);
+            //the filters have defined values, listing the matching results
+            if ($_GET['panneauS'] && $_GET['onduleurS'] && $_GET['departementS'])
+          {
+                  $data = dbListInstallation()
                   sendJsonData($data,200);
           }
+          //An id is provided,fetching information about the installation
+            if ($id && $id!='')
+          {
+                  $data = dbRequestInstallation();
+                  sendJsonData($data,200);
+          }
+            else 
+          {
+            //nothing is provided, adding options to the filters
+                  $data = dbGetRandomValues();
+                  sendJsonData($data,200);
+          }}
       }
   }
 
