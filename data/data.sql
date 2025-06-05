@@ -507,3 +507,10 @@ INSERT INTO Installation (
 (1, 1, '2007-01-01', '2007-09-01', 14, 'MECOTECH', 43.51, 1.51, 3633, 3010, 20, 37, 22, -20, 1, NULL, NULL, NULL, 1, 1, 1001, 1),
 (2, 4, '2008-01-01', '2008-03-01', 18, 'Helio Therma', 43.5, 3.37, 3742, 3060, 20, 38, 23, 70, 0, NULL, NULL, NULL, 2, 2, 1002, 2),
 (3, 12, '2007-01-01', '2007-12-01', 63, 'Cervin Enr', 45.06, 4.88, 13360, 11025, 15, 37, 81, -20, 0, NULL, NULL, NULL, 3, 3, 1004, 3);
+
+
+INSERT INTO Personne (mdp, email, nom, prenom) VALUES 
+('monMDP123!', 'dupont@mail.com', 'Dupont', 'Jean'),
+('monMDP456!', 'dujardins@mail.com', 'Dujardins', 'Charlotte'),
+('monMDP789!', 'orlande@mail.com', 'Orlande', 'Charles');
+
