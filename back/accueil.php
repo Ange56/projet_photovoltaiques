@@ -40,7 +40,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
             <!-- Droite : info admin (ajouté pour garder l'info admin) -->
             <div class="admin-info">
-                <span>Utilisateur - <?php echo htmlspecialchars($admin_name); ?></span>
+                <span>Admin - <?php echo htmlspecialchars($admin_name); ?></span>
                 <div class="user-avatar"><?php echo strtoupper(substr($admin_name, 0, 1)); ?></div>
             </div>
         </nav>
@@ -111,124 +111,126 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
         </div>
     </div>
 
-    <!-- Modal pour ajouter/modifier une installation -->
-    <div id="installationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">Nouvelle installation</h2>
-                <span class="close" id="btnCloseModal">&times;</span>
-            </div>
-            <form id="installationForm">
-                
-                <h3>Installations</h3>
-                <input type="hidden" id="installationId" value="">
-                <div class="form-group">
-                    <label for="installDate">Date d'installation</label>
-                    <input type="date" id="installDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="surface">Surface (m²)</label>
-                    <input type="number" id="surface" min="0" step="0.1" required>
-                </div>
-                <div class="form-group">
-                    <label for="power">Puissance crête (kW)</label>
-                    <input type="number" id="power" min="0" step="0.1" required>
-                </div>
-                <div class="form-group">
-                    <label for="localisation">Localisation</label>
-                    <input type="text" id="localisation" required>
-                </div>
+    <!-- Nouvelle structure HTML pour la modale -->
+	<div id="installationModal" class="modal">
+		<div class="modal-content">
+			<!-- Header fixe -->
+			<div class="modal-header">
+				<h2 id="modalTitle">Nouvelle installation</h2>
+				<span class="close" id="btnCloseModal">&times;</span>
+			</div>
+			
+			<!-- Corps avec scroll -->
+			<div class="modal-body">
+				<form id="installationForm">
+					<h3>Installations</h3>
+					<input type="hidden" id="installationId" value="">
+					<div class="form-group">
+						<label for="installDate">Date d'installation</label>
+						<input type="date" id="installDate" required>
+					</div>
+					<div class="form-group">
+						<label for="surface">Surface (m²)</label>
+						<input type="number" id="surface" min="0" step="0.1" required>
+					</div>
+					<div class="form-group">
+						<label for="power">Puissance crête (kW)</label>
+						<input type="number" id="power" min="0" step="0.1" required>
+					</div>
+					<div class="form-group">
+						<label for="localisation">Localisation</label>
+						<input type="text" id="localisation" required>
+					</div>
 
-
-                <h3>Placement</h3>
-                <div class="form-group">
-                    <label for="orientation">Orientation</label>
-                    <input type="number" id="orientation" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="orientationOPT">Orientation Optimum</label>
-                    <input type="number" id="orientationOPT" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="pente">Pente</label>
-                    <input type="number" id="pente" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="penteOPT">Pente Optimum</label>
-                    <input type="number" id="penteOPT" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="installateur">Intallateur</label>
-                    <input type="text" id="installateur" required>
-                </div>
-                <div class="form-group">
-                    <label for="production">Production (PVGIS)</label>
-                    <input type="number" id="pente" min="1" required>
-                </div>
-                
-                <h3>Panneau</h3>
-                <div class="form-group">
-                    <label for="modele">Modèle</label>
-                    <input type="text" id="modele" required>
-                </div>
-                <div class="form-group">
-                    <label for="marque">Marque</label>
-                    <input type="text" id="marque" required>
-                </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre de panneaux</label>
-                    <input type="number" id="nombre" min="1" required>
-                </div>
-                
-                <h3>Adresse</h3>
-                <div class="form-group">
-                    <label for="lat">Lattitude</label>
-                    <input type="number" id="lat" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="long">Longitude</label>
-                    <input type="number" id="long" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="localite">Localité</label>
-                    <input type="number" id="localite" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="codePostal">Code Postal</label>
-                    <input type="number" id="codePostal" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="zoneAdm">Zone Administrative</label>
-                    <input type="text" id="zoneAdm" required>
-                </div>
-                <div class="form-group">
-                    <label for="pays">Pays</label>
-                    <input type="number" id="pays" min="1" required>
-                </div>
-                
-                <h3>Onduleur</h3>
-                <div class="form-group">
-                    <label for="modeleOnd">Modèle</label>
-                    <input type="text" id="modeleOnd" required>
-                </div>
-                <div class="form-group">
-                    <label for="marqueOnd">Marque</label>
-                    <input type="text" id="marqueOnd" required>
-                </div>
-                <div class="form-group">
-                    <label for="nombreOnd">Nombre</label>
-                    <input type="text" id="nombreOnd" required>
-                </div>
-                
-
-
-                <div class="form-buttons">
-                    <button type="button" class="btn-secondary" id="btnCancel">Annuler</button>
-                    <button type="submit" class="add-btn" id="btnSubmit">Ajouter</button>
-                </div>
-            </form>
-        </div>
-    </div>
+					<h3>Placement</h3>
+					<div class="form-group">
+						<label for="orientation">Orientation</label>
+						<input type="number" id="orientation" min="1" required>
+					</div>
+					<div class="form-group">
+						<label for="orientationOPT">Orientation Optimum</label>
+						<input type="number" id="orientationOPT" min="1" required>
+					</div>
+					<div class="form-group">
+						<label for="pente">Pente</label>
+						<input type="number" id="pente" min="1" required>
+					</div>
+					<div class="form-group">
+						<label for="penteOPT">Pente Optimum</label>
+						<input type="number" id="penteOPT" min="1" required>
+					</div>
+					<div class="form-group">
+						<label for="installateur">Installateur</label>
+						<input type="text" id="installateur" required>
+					</div>
+					<div class="form-group">
+						<label for="production">Production (PVGIS)</label>
+						<input type="number" id="production" min="1" required>
+					</div>
+					
+					<h3>Panneau</h3>
+					<div class="form-group">
+						<label for="modele">Modèle</label>
+						<input type="text" id="modele" required>
+					</div>
+					<div class="form-group">
+						<label for="marque">Marque</label>
+						<input type="text" id="marque" required>
+					</div>
+					<div class="form-group">
+						<label for="nombre">Nombre de panneaux</label>
+						<input type="number" id="nombre" min="1" required>
+					</div>
+					
+					<h3>Adresse</h3>
+					<div class="form-group">
+						<label for="lat">Latitude</label>
+						<input type="number" id="lat" step="any" required>
+					</div>
+					<div class="form-group">
+						<label for="long">Longitude</label>
+						<input type="number" id="long" step="any" required>
+					</div>
+					<div class="form-group">
+						<label for="localite">Localité</label>
+						<input type="text" id="localite" required>
+					</div>
+					<div class="form-group">
+						<label for="codePostal">Code Postal</label>
+						<input type="text" id="codePostal" required>
+					</div>
+					<div class="form-group">
+						<label for="zoneAdm">Zone Administrative</label>
+						<input type="text" id="zoneAdm" required>
+					</div>
+					<div class="form-group">
+						<label for="pays">Pays</label>
+						<input type="text" id="pays" required>
+					</div>
+					
+					<h3>Onduleur</h3>
+					<div class="form-group">
+						<label for="modeleOnd">Modèle</label>
+						<input type="text" id="modeleOnd" required>
+					</div>
+					<div class="form-group">
+						<label for="marqueOnd">Marque</label>
+						<input type="text" id="marqueOnd" required>
+					</div>
+					<div class="form-group">
+						<label for="nombreOnd">Nombre</label>
+						<input type="number" id="nombreOnd" min="1" required>
+					</div>
+				</form>
+			</div>
+			
+			<!-- Boutons fixes en bas -->
+			<div class="form-buttons">
+				<button type="button" class="btn-secondary" id="btnCancel">Annuler</button>
+				<button type="submit" class="add-btn" id="btnSubmit" form="installationForm">Ajouter</button>
+			</div>
+		</div>
+	</div>
 
     <!-- Messages de notification -->
     <div id="notification" class="notification">
