@@ -78,7 +78,7 @@ window.addEventListener("load",function(){
 
     info.innerText+= id
 
-    request(display,'../api/request.php/detail',"GET",id)
+    request(display,'../../api/recherche.php/installation',"GET",id)
 
 
     installationButton.onclick = toggle(installationMenu);

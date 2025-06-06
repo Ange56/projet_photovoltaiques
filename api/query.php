@@ -1,24 +1,6 @@
 <?php 
 
-require_once('constants.php')
-
-  // Create the connection to the database.
-  // return False on error and the database otherwise.
-  function dbConnect()
-  {
-    try
-    {
-      $db = new PDO('pgsql:host='.DB_SERVER.';port='.DB_PORT.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-    catch (PDOException $exception)
-    {
-      error_log('Connection error: '.$exception->getMessage());
-      return false;
-    }
-    return $db;
-  }
-
+require_once('config/database.php')
 
   ///Used to find information about an installation that has a specific id
   function dbRequestInstallation($db, $id = '')
@@ -26,7 +8,13 @@ require_once('constants.php')
     try
     {
       if ($id != ''){
-        $request = ' SELECT * FROM - WHERE id=:id';
+        $request = ' SELECT i.*, o.*, p.*, c.*, d.*, r.* FROM Installation i 
+        INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
+        INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
+        INNER JOIN Communes c ON c.code_insee = i.code_insee
+        INNER JOIN Departement d ON d.code = c.code;
+        INNER JOIN Region r ON r.code = d.code_Region
+        WHERE i.id=:id';
       $statement = $db->prepare($request);
         $statement->bindParam(':id', $login, PDO::PARAM_STR, 20);
       $statement->execute();
@@ -51,7 +39,11 @@ require_once('constants.php')
     {
       //adds the chosen filters
       
-        $request = ' SELECT * FROM -';
+        $request = ' SELECT i.mois_installation, i.an_installation, i.nb_panneaux, i.surface, i.puissance_crete, c.nom_standard  FROM Installation i
+        INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
+        INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
+        INNER JOIN Communes c ON c.code_insee = i.code_insee
+        INNER JOIN Departement d ON d.code = c.code';
         if($departement!='any'){
           $request.="WHERE = :department"
         }
@@ -97,7 +89,11 @@ require_once('constants.php')
 function dbGetRandomValues($count=20){
   try
     {
-        $request = ' SELECT * FROM -
+        $request = ' SELECT DISTINCT d.nom, p.nom, o.nom FROM Installation i
+        INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
+        INNER JOIN Panneau p ON o.id_panneau= i.id_panneau
+        INNER JOIN Communes c ON c.code_insee = i.code_insee
+        INNER JOIN Departement d ON d.code = c.code
         ORDER BY RAND()
         LIMIT :count;';
       $statement = $db->prepare($request);

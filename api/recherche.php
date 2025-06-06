@@ -1,9 +1,9 @@
   <?php 
   
-  require_once('database.php');
+  require_once('query.php');
 
     // Database connection.
-  $db = dbConnect();
+  $db = getConnection();
   if (!$db)
   {
     header('HTTP/1.1 503 Service Unavailable');
@@ -61,11 +61,5 @@
 
       }
   }
-
-
-
-
-
-
 
   ?>

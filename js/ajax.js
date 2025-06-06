@@ -2,7 +2,7 @@ function request(callback,api,method,data=null){
 
     // Create XML HTTP request.
  let xhr = new XMLHttpRequest();
-   if (type === 'GET' && data != null)
+   if (method === 'GET' && data != null)
   {api += '?' + data}
  xhr.open(method,api);
  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');

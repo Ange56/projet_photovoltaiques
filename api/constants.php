@@ -1,7 +1,0 @@
-<?php
-
-$DB_SERVER="";
-$DB_PORT="";
-$DB_NAME="";
-$DB_USER="";
-$DB_PASSWORD="";
