@@ -1,4 +1,4 @@
-function request(callback,api,method,data=null){
+function request(method,api,callback,data=null){
 
     // Create XML HTTP request.
  let xhr = new XMLHttpRequest();
@@ -14,8 +14,7 @@ function request(callback,api,method,data=null){
  case 201: callback(JSON.parse(xhr.responseText));
  break;
 default: console.log('HTTP error: ' + xhr.status);
- }
- };
+ }};
 
  // Send XML HTTP request.
  xhr.send();

@@ -1,6 +1,6 @@
 <?php 
 
-require_once('config/database.php')
+require_once('config/database.php');
 
   ///Used to find information about an installation that has a specific id
   function dbRequestInstallation($db, $id = '')
@@ -12,27 +12,26 @@ require_once('config/database.php')
         INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
         INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
         INNER JOIN Communes c ON c.code_insee = i.code_insee
-        INNER JOIN Departement d ON d.code = c.code;
+        INNER JOIN Departement d ON d.code = c.code
         INNER JOIN Region r ON r.code = d.code_Region
         WHERE i.id=:id';
       $statement = $db->prepare($request);
-        $statement->bindParam(':id', $login, PDO::PARAM_STR, 20);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-      $result = $statement->fetchAll(PDO::FETCH_ASSOC);}
+      $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+          return $result;}
       else{
         return false;
-      }
+      }}
     
     catch (PDOException $exception)
     {
       error_log('Request error: '.$exception->getMessage());
       return false;
     }
-    return $result;
-    }
 }
 
-///Lists all installations that match a a filter
+///Lists all installations that match the filters
  function dbListInstallation($db, $departement='any', $onduleur='any' ,$panneau='any', $count=50 )
 {
     try
@@ -45,16 +44,16 @@ require_once('config/database.php')
         INNER JOIN Communes c ON c.code_insee = i.code_insee
         INNER JOIN Departement d ON d.code = c.code';
         if($departement!='any'){
-          $request.="WHERE = :department"
+          $request.="WHERE = :department";
         }
         if($onduleur!='any'){
-          $request.="WHERE = :onduleur"
+          $request.="WHERE = :onduleur";
         }
         if($panneau!='any'){
-          $request.="WHERE = :panneau"
+          $request.="WHERE = :panneau";
         }
 
-      $statement .= "LIMIT :count;"
+      $request .= "LIMIT :count;";
       $statement = $db->prepare($request);
 
 
@@ -72,41 +71,36 @@ require_once('config/database.php')
        
       $statement->execute();
       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-      else{
-        return false;
-      }
-    
+        return $result;}
+
     catch (PDOException $exception)
     {
       error_log('Request error: '.$exception->getMessage());
       return false;
     }
-    return $result;
-    }
 }
 
 ///gets a specific amount of random values to be used as filter options
-function dbGetRandomValues($count=20){
+function dbGetRandomValues($db,$count=20){
   try
     {
         $request = ' SELECT DISTINCT d.nom, p.nom, o.nom FROM Installation i
         INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
-        INNER JOIN Panneau p ON o.id_panneau= i.id_panneau
+        INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
         INNER JOIN Communes c ON c.code_insee = i.code_insee
         INNER JOIN Departement d ON d.code = c.code
-        ORDER BY RAND()
+        ORDER BY RANDOM()
         LIMIT :count;';
       $statement = $db->prepare($request);
         $statement->bindParam(':count', $count);
       $statement->execute();
       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $result;}
     
     catch (PDOException $exception)
     {
       error_log('Request error: '.$exception->getMessage());
       return false;
-    }
-    return $result;
     }
 }
 

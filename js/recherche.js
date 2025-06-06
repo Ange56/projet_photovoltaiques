@@ -12,7 +12,7 @@ function addOpt(select,options){
 
 }
 
-///param result the elements that matches the query
+///param result the elements that match the query
 ///lists the matching results
 function display(result){
     let list= getElementById("list");
@@ -33,9 +33,9 @@ let selectp=document.getElementById("panneauS");
     console.log("a")
     if(selecti && selectd && selectp){
         
-        request(addOpt,'../../api/recherche.php/installation',"GET")}
+        request("GET",'../../api/recherche.php/installation',addOpt)}
 
     let form=document.getElementById("selection")
-    form.addEventListener("submit",request(display,'../../api/recherche.php/installation',"GET")) 
+    form.addEventListener("submit",request("GET",'../../api/recherche.php/installation',display)) 
 }
 )

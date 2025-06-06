@@ -16,8 +16,7 @@ function display(installation){
     installationMenu.innerHTML+=
     "<tr><td>Date d'installation</td><td>"+installation['mois_installation']+"/"+installation['an_installation']+"</td></tr>"+
     "<tr><td>Surface</td><td>"+installation['surface']+"</td></tr>"+
-    "<tr><td>Puissance crete</td><td>"+installation['puissance_crete']+"</td></tr>"+
-    "<tr><td>Localisation</td><td>"+installation['locality']+"</td></tr>"
+    "<tr><td>Puissance crete</td><td>"+installation['puissance_crete']+"</td></tr>"
 
     placementMenu.innerHTML+=
     "<tr><td>Orientation</td><td>"+installation['orientation']+"</td></tr>"+
@@ -29,13 +28,13 @@ function display(installation){
 
     panneauMenu.innerHTML+=
     "<tr><td>Modèle</td><td>"+installation['panneaux_modele']+"</td></tr>"+
-    "<tr><td>Marque</td><td>"+installation['panneaux_marque']+"</td></tr>"+
+    "<tr><td>Marque</td><td>"+installation['nom']+"</td></tr>"+
     "<tr><td>Nombre</td><td>"+installation['nb_panneaux']+"</td></tr>"
 
     adresseMenu.innerHTML+=
     "<tr><td>Lattitude</td><td>"+installation['lat']+"</td></tr>"+
     "<tr><td>Longitude</td><td>"+installation['long']+"</td></tr>"+
-    "<tr><td>Localité</td><td>"+installation['locality']+"</td></tr>"+
+    "<tr><td>Localité</td><td>"+installation['lnom_standard']+"</td></tr>"+
     "<tr><td>Code postal</td><td>"+installation['postal_town']+installation['postal_code']+installation['postal_code_suffix']+"</td></tr>"+
     "<tr><td>Zone administrative</td><td>"+installation['administrative_area_level_1']+installation['administrative_area_level_2']+installation['administrative_area_level_3']+installation['administrative_area_level_4']+"</td></tr>"+
     "<tr><td>Pays</td><td>"+installation['country']+"</td></tr>"+
@@ -43,7 +42,7 @@ function display(installation){
 
     ondulateurMenu.innerHTML+=
     "<tr><td>Modèle</td><td>"+installation['onduleur_modele']+"</td></tr>"+
-    "<tr><td>Marque</td><td>"+installation['onduleur_marque']+"</td></tr>"+
+    "<tr><td>Marque</td><td>"+installation['nom_Marque_onduleur']+"</td></tr>"+
     "<tr><td>Nombre</td><td>"+installation['nb_onduleur']+"</td></tr>"
 }
 
@@ -78,14 +77,14 @@ window.addEventListener("load",function(){
 
     info.innerText+= id
 
-    request(display,'../../api/recherche.php/installation',"GET",id)
+    request("GET",'../../api/recherche.php/installation',display,id)
 
 
-    installationButton.onclick = toggle(installationMenu);
-    placementButton.onclick = toggle(placementMenu);
-    adresseButton.onclick = toggle(adresseMenu);
-    panneauButton.onclick = toggle(panneauMenu);
-    ondulateurButton.onclick = toggle(ondulateurMenu);
+    installationButton.onclick = installationMenu.toggle('d-none');
+    placementButton.onclick = placementMenu.toggle('d-none');
+    adresseButton.onclick = adresseMenu.toggle('d-none');
+    panneauButton.onclick = panneauMenu.toggle('d-none');
+    ondulateurButton.onclick = ondulateurMenu.toggle('d-none');
     
 
 })
