@@ -12,6 +12,65 @@ $action = $_GET['action'] ?? 'all';
 
 switch ($action) {
 
+    // Statistiques générales (nécessaire pour votre page d'accueil)
+    case 'stats_generales':
+        $allStats = [];
+        
+        // Statistiques générales
+        $stmt = $pdo->query("SELECT COUNT(*) as count FROM Installation");
+        $allStats['general']['total_installations'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        
+        $stmt = $pdo->query("SELECT COUNT(*) as count FROM Installateur");
+        $allStats['general']['total_installateurs'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        
+        $stmt = $pdo->query("SELECT COUNT(*) as count FROM Marque_onduleur");
+        $allStats['general']['total_marques_onduleurs'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        
+        $stmt = $pdo->query("SELECT COUNT(*) as count FROM Marque_panneau");
+        $allStats['general']['total_marques_panneaux'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        
+        echo json_encode($allStats);
+        break;
+        
+    case 'installations_par_annee':
+        // Nombre d'installations par année
+        $stmt = $pdo->query("
+            SELECT YEAR(an_installation) as annee, COUNT(*) as count 
+            FROM Installation 
+            GROUP BY YEAR(an_installation) 
+            ORDER BY annee
+        ");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+        
+    case 'installations_par_region':
+        // Nombre d'installations par région
+        $stmt = $pdo->query("
+            SELECT r.nom as region, COUNT(*) as count
+            FROM Installation i
+            JOIN Communes c ON i.code_insee = c.code_insee
+            JOIN Departement d ON c.code = d.code
+            JOIN Region r ON d.code_Region = r.code
+            GROUP BY r.nom
+            ORDER BY count DESC
+        ");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+        
+    case 'installations_annee_region':
+        // Nombre d'installations par année et région
+        $stmt = $pdo->query("
+            SELECT YEAR(i.an_installation) as annee, r.nom as region, COUNT(*) as count
+            FROM Installation i
+            JOIN Communes c ON i.code_insee = c.code_insee
+            JOIN Departement d ON c.code = d.code
+            JOIN Region r ON d.code_Region = r.code
+            GROUP BY YEAR(i.an_installation), r.nom
+            ORDER BY annee, r.nom
+        ");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+
     // Filtres pour le formulaire (année + département)
     case 'filters':
         $filters = [];

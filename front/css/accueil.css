@@ -121,6 +121,52 @@ body, html {
   font-size: 18px;
   color: #666;
   border-radius: 10px;
+} .stats-section {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+.chart-container {
+    margin: 2rem 0;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+.stat-card {
+    background: linear-gradient(135deg, #53ace0 0%, #18aae4 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+.chart-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: bold;
 }
 
 /* ------------ FOOTER -------------- */
