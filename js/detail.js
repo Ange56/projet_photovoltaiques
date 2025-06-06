@@ -34,7 +34,7 @@ function display(installation){
 
     adresseMenu.innerHTML+=
     "<tr><td>Lattitude</td><td>"+installation['lat']+"</td></tr>"+
-    "<tr><td>Longitude</td><td>"+installation['lon']+"</td></tr>"+
+    "<tr><td>Longitude</td><td>"+installation['long']+"</td></tr>"+
     "<tr><td>Localité</td><td>"+installation['locality']+"</td></tr>"+
     "<tr><td>Code postal</td><td>"+installation['postal_town']+installation['postal_code']+installation['postal_code_suffix']+"</td></tr>"+
     "<tr><td>Zone administrative</td><td>"+installation['administrative_area_level_1']+installation['administrative_area_level_2']+installation['administrative_area_level_3']+installation['administrative_area_level_4']+"</td></tr>"+
@@ -55,7 +55,7 @@ function toggle(menu){
 }
 
 
-///fetches the information abotu the selected installation to display and gives the buttons their functionality
+///fetches the information about the selected installation to display and gives the buttons their functionality
 window.addEventListener("load",function(){
 
     let urlParams= new URLSearchParams(this.window.location.search);
