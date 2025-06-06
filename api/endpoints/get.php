@@ -136,6 +136,90 @@ switch ($action) {
         echo json_encode($stmt->fetch(PDO::FETCH_ASSOC));
         break;
 
+
+
+
+
+        //---------------------------PAGE RECHERCHE-----------------------------------
+    case 'marques_onduleurs'://20 marques d'onduleurs
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_onduleur
+            ORDER BY RAND()
+            LIMIT 20
+        ");
+        echo json_encode(['marques_onduleurs' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'marques_panneaux'://20 marques de panneaux
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_panneau
+            ORDER BY RAND()
+            LIMIT 20
+        ");
+        echo json_encode(['marques_panneaux' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'departements_random'://20 departements
+        $stmt = $pdo->query("
+            SELECT DISTINCT code, nom
+            FROM Departement
+            ORDER BY RAND()
+            LIMIT 20
+        ");
+        echo json_encode(['departements' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+    
+        case 'recherche_installations':
+            $marque_onduleur = $_GET['marque_onduleur'] ?? null;
+            $marque_panneau = $_GET['marque_panneau'] ?? null;
+            $departement = $_GET['departement'] ?? null;
+
+            // Construction de la requête avec les filtres
+            $sql = "
+                SELECT 
+                    i.id,
+                    i.puissance_crete,
+                    c.nom_standard AS localite,
+                    d.nom AS departement,
+                    mo.nom AS marque_onduleur,
+                    mp.nom AS marque_panneau
+                FROM Installation i
+                JOIN Communes c ON i.code_insee = c.code_insee
+                JOIN Departement d ON c.code = d.code
+                JOIN Onduleur o ON i.id_onduleur = o.id_onduleur
+                JOIN Marque_onduleur mo ON o.nom_Marque_onduleur = mo.nom
+                JOIN Panneau p ON i.id_panneau = p.id_panneau
+                JOIN Marque_panneau mp ON p.nom = mp.nom
+                WHERE 1=1
+            ";
+
+            $params = [];
+
+            // Ajout des filtres selon les paramètres reçus
+            if ($marque_onduleur) {
+                $sql .= " AND mo.nom = :marque_onduleur";
+                $params['marque_onduleur'] = $marque_onduleur;
+            }
+
+            if ($marque_panneau) {
+                $sql .= " AND mp.nom = :marque_panneau";
+                $params['marque_panneau'] = $marque_panneau;
+            }
+
+            if ($departement) {
+                $sql .= " AND d.code = :departement";
+                $params['departement'] = $departement;
+            }
+
+            $sql .= " ORDER BY i.an_installation DESC LIMIT 50";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+            echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+            break;
+
     // Toutes les installations (ex : page accueil)
     case 'all':
     default:
@@ -148,4 +232,5 @@ switch ($action) {
         ");
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
+
 }
