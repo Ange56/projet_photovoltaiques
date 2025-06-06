@@ -21,9 +21,9 @@ $nom_utilisateur = $_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom'];
 
         <title>Pannoneau - Administration</title>
         <link rel="stylesheet" href="../front/css/accueil_admin.css">
-        <link rel="icon" type="image/png" href="../images/logo.png">  <!--à mettre sur les autres pages-->
+        <link rel="icon" type="image/png" href="../images/logo.png">
 
-        <script src="accueil.js"></script>
+        <script src="accueil_admin.js"></script>
 
     </head>
     <body>
