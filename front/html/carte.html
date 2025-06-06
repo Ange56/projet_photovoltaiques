@@ -7,7 +7,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
 
-        <!--<script src="script.js"></script>-->
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link rel="icon" type="image/png" href="../../images/logo.png">  <!--à mettre sur les autres pages-->
+        <!-- <script src="../js/carte.js" defer></script> -->
+         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+         <script src="/projet_fin_annee_2025/projet_photovoltaiques/js/carte.js" defer></script>
+
         <title> Carte </title>
     </head>
     <body>
@@ -37,12 +44,33 @@
 
           
 
-         <main id="page">
+        <main id="page" class="p-4">
             <h1 id="a">Visualisation sur une carte</h1>
-            
-            
-        </main>
 
+            <div class="container py-4">
+                <!-- Formulaire de filtre -->
+                <form id="filter-form" class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="annee" class="form-label">Année d'installation</label>
+                        <select id="annee" class="form-select" required></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="departement" class="form-label">Département</label>
+                        <select id="departement" class="form-select" required></select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Afficher sur la carte</button>
+                    </div>
+                </form>
+
+                <!-- Carte -->
+                <div id="map" class="rounded shadow"></div>
+            </div>
+
+
+                    
+
+        </main>
 
          <!-- Footer -->
         <footer class="footer-custom">
