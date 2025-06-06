@@ -1,16 +1,15 @@
 <?php
-// accueil_admin.php
 session_start();
 
-// Vérification de l'authentification admin (à adapter selon votre système)
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    // Pour la démo, on simule un admin connecté
-    $_SESSION['admin_logged_in'] = true;
-    $_SESSION['admin_name'] = 'Admin';
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: connexion.php');
+    exit;
 }
 
-$admin_name = $_SESSION['admin_name'] ?? 'Admin';
+$nom_utilisateur = $_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom'];
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -22,6 +21,8 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
         <title>Pannoneau - Administration</title>
         <link rel="stylesheet" href="../front/css/accueil_admin.css">
+        <link rel="icon" type="image/png" href="../images/logo.png">  <!--à mettre sur les autres pages-->
+
         <script src="accueil.js"></script>
 
     </head>
@@ -46,8 +47,10 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
                 <!-- Droite : info admin (ajouté pour garder l'info admin) -->
                 <div class="admin-info">
-                    <span>Admin - <?php echo htmlspecialchars($admin_name); ?></span>
-                    <div class="user-avatar"><?php echo strtoupper(substr($admin_name, 0, 1)); ?></div>
+                    <span>Admin - <?php echo htmlspecialchars($nom_utilisateur); ?></span>
+                    <div class="user-avatar"><?php echo strtoupper(substr($nom_utilisateur, 0, 1)); ?></div>
+                    <a href="logout.php" class="btn btn-sm btn-outline-light ms-2">Déconnexion</a>
+
                 </div>
             </nav>
         </header>

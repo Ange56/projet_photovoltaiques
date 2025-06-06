@@ -1,6 +1,16 @@
 <?php 
-?>
+session_start();
 
+// Récupérer le message d'erreur s'il existe
+$messageErreur = $_SESSION['messageErreur'] ?? '';
+unset($_SESSION['messageErreur']); // Supprimer le message après l'avoir lu
+
+// Si l'utilisateur est déjà connecté, rediriger vers l'accueil
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('Location: accueil.php');
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,6 +20,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
+        <link rel="icon" type="image/png" href="../images/logo.png">  <!--à mettre sur les autres pages-->
 
         <!--<script src="script.js"></script>-->
         <title> Connexion </title>
@@ -18,24 +29,24 @@
         
         <header>
             <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
-			  <!-- Gauche : logo + titre -->
-			    <div class="d-flex align-items-center">
-			        
+              <!-- Gauche : logo + titre -->
+                <div class="d-flex align-items-center">
+                    
                     <a href="../front/html/accueil.html">
                         <img src="../images/logo.png" alt="Logo" class="logo-img me-2">
                     </a>
                     <span class="navbar-title">Panoneau</span>
-			    </div>
+                </div>
 
                 
-			  <!-- Centre : boutons -->
-			    <div class="d-flex gap-2">
+              <!-- Centre : boutons -->
+                <div class="d-flex gap-2">
                     <a href="../front/html/accueil.html" class="nav-button">Accueil</a>
                     <a href="../front/html/recherche.html" class="nav-button">Recherche</a>
                     <a href="../front/html/carte.html" class="nav-button">Carte</a>
                     <a href="connexion.php" class="nav-button active">Connexion</a>
-			    </div>
-			</nav>
+                </div>
+            </nav>
         </header>
 
         <main class="main-content">
@@ -46,11 +57,9 @@
                 <div class="alert alert-danger" role="alert">
                     <?= htmlspecialchars($messageErreur) ?>
                 </div>
-
-
                 <?php endif; ?>
 
-                <form class="formulaire d-flex flex-column align-items-center" action="../php/connexion_medecin.php" method="POST">
+                <form class="formulaire d-flex flex-column align-items-center" action="auth.php" method="POST">
                         
                         <div class="mb-3 w-100">
                             <label for="mail1" class="form-label">Saisissez votre adresse mail : *</label>
@@ -71,10 +80,12 @@
                             </div>
                             
                             <div class="mdp_oublie">
-                                <a href="../html/mot_passe.html">Mot de passe oublié ?</a>
+                                <a href="#">Mot de passe oublié ?</a>
                             </div>
                         </div>
                     
+                    <!-- Champ caché pour indiquer l'action -->
+                    <input type="hidden" name="action" value="login">
                     
                     <div class="d-flex justify-content-center">
                         <input class="btn dark_blue" type="submit" value="Se connecter">
@@ -82,7 +93,6 @@
                 </form>
             </div>
         </main>
-
 
          <!-- Footer -->
         <footer class="footer-custom">

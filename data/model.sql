@@ -150,3 +150,18 @@ CREATE TABLE Installation(
     CONSTRAINT Installation_Communes1_FK FOREIGN KEY (code_insee) REFERENCES Communes(code_insee),
     CONSTRAINT Installation_Panneau2_FK FOREIGN KEY (id_panneau) REFERENCES Panneau(id_panneau)
 );
+
+
+
+#------------------------------------------------------------
+# Table: Personne
+#------------------------------------------------------------
+
+CREATE TABLE Personne (
+        id        Int Auto_increment NOT NULL,
+        mdp       Varchar(150) NOT NULL,
+        email     Varchar(100) NOT NULL,
+        nom       Varchar(50) NOT NULL,
+        prenom    Varchar(50) NOT NULL,
+        CONSTRAINT Personne_PK PRIMARY KEY (id)
+);
