@@ -26,6 +26,11 @@ function createStatsCards(stats) {
 
 // Fonction pour créer le graphique des installations par année
 function createInstallationsParAnneeChart(data) {
+    const canvas = document.getElementById('installationsParAnneeChart');
+    if (!canvas) {
+        console.error('Canvas installationsParAnneeChart not found');
+        return;
+    }
     const ctx = document.getElementById('installationsParAnneeChart').getContext('2d');
     
     if (installationsParAnneeChart) {
@@ -65,6 +70,11 @@ function createInstallationsParAnneeChart(data) {
 
 // Fonction pour créer le graphique des installations par région
 function createInstallationsParRegionChart(data) {
+    const canvas = document.getElementById('installationsParRegionChart');
+    if (!canvas) {
+        console.error('Canvas installationsParRegionChart not found');
+        return;
+    }
     const ctx = document.getElementById('installationsParRegionChart').getContext('2d');
     
     if (installationsParRegionChart) {
@@ -104,29 +114,47 @@ function createInstallationsParRegionChart(data) {
 
 // Fonction pour créer le graphique des installations par année et région (en barres)
 function createInstallationsAnneeRegionChart(data) {
+    const canvas = document.getElementById('installationsAnneeRegionChart');
+    if (!canvas) {
+        console.error('Canvas installationsAnneeRegionChart not found');
+        return;
+    }
     const ctx = document.getElementById('installationsAnneeRegionChart').getContext('2d');
     
     if (installationsAnneeRegionChart) {
         installationsAnneeRegionChart.destroy();
     }
 
+    // Vérifier si on a des données
+    if (!data || data.length === 0) {
+        console.warn('Aucune donnée pour le graphique année-région');
+        return;
+    }
+
     // Organiser les données par région
     const regions = [...new Set(data.map(item => item.region))];
     const annees = [...new Set(data.map(item => item.annee))].sort();
     
-    const datasets = regions.map((region, index) => {
-        const regionData = annees.map(annee => {
-            const found = data.find(item => item.region === region && item.annee === annee);
-            return found ? found.count : 0;
-        });
+
 
         const colors = [
             'rgba(255, 99, 132, 0.6)',
             'rgba(54, 162, 235, 0.6)',
             'rgba(255, 205, 86, 0.6)',
             'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255, 0.6)'
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(199, 199, 199, 0.6)',
+            'rgba(83, 102, 255, 0.6)',
+            'rgba(255, 99, 255, 0.6)',
+            'rgba(99, 255, 132, 0.6)'
         ];
+
+        const datasets = regions.map((region, index) => {
+            const regionData = annees.map(annee => {
+                const found = data.find(item => item.region === region && item.annee === annee);
+                return found ? parseInt(found.count) : 0;
+        });
 
         return {
             label: region,
