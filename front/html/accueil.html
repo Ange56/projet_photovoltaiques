@@ -85,6 +85,27 @@
 
                 <div class="chart-container">
                     <h3 class="chart-title">Installation par régions par années</h3>
+                    
+                    <div class="year-selector-container">
+                        <div class="year-selector-title">Sélectionner les années à afficher :</div>
+                        
+                        <div class="dropdown-container">
+                            <div class="dropdown-button" id="dropdownButton">
+                                <span id="dropdownText">Toutes les années sélectionnées</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </div>
+                            
+                            <div class="dropdown-content" id="dropdownContent">
+                                <!-- Les options seront générées dynamiquement -->
+                            </div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-primary" onclick="selectAllYears()">Tout sélectionner</button>
+                            <button class="btn btn-secondary" onclick="deselectAllYears()">Tout désélectionner</button>
+                        </div>
+                    </div>
+                    
                     <canvas id="installationsAnneeRegionChart"></canvas>
                 </div>
             </div>

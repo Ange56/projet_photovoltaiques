@@ -169,6 +169,176 @@ body, html {
     font-weight: bold;
 }
 
+/*----------DROPDOWN----------------*/
+
+.chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.year-selector-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.year-selector-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.dropdown-button {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-button:hover {
+    border-color: #667eea;
+}
+
+.dropdown-button.active {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-option:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-option input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.1);
+}
+
+.dropdown-option label {
+    cursor: pointer;
+    font-size: 14px;
+    color: #495057;
+    user-select: none;
+    flex: 1;
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #667eea;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.selected-count {
+    font-size: 12px;
+    color: #667eea;
+    font-weight: 500;
+}
+
+canvas {
+    max-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .dropdown-container {
+      max-width: 100%;
+  }
+
+  .controls {
+      flex-direction: column;
+      gap: 8px;
+  }
+
+  .btn {
+      width: 100%;
+      text-align: center;
+  }
+}
+
 /* ------------ FOOTER -------------- */
 .footer-custom {
   background-color: #06919b;
