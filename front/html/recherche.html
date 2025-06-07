@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Rechercher des installations</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
-    <link href="../css/recherche.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-        <!--Header-->
-     <header>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <link href="../css/accueil.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
+        <link rel="icon" type="image/png" href="../../images/logo.png">  <!--à mettre sur les autres pages-->
+        <script src="../../js/recherche.js" defer></script>
+        <title> Recherche </title>
+    </head>
+    <body>
+        
+        <header>
             <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
 			  <!-- Gauche : logo + titre -->
 			    <div class="d-flex align-items-center">
 			        
                     <a href="accueil.html">
-                        <img src="../../images/logo/logo.png" alt="Logo" class="logo-img me-2">
+                        <img src="../../images/logo.png" alt="Logo" class="logo-img me-2">
                     </a>
                     <span class="navbar-title">Panoneau</span>
 			    </div>
@@ -28,43 +28,84 @@
 			    <div class="d-flex gap-2">
                     <a href="accueil.html" class="nav-button">Accueil</a>
                     <a href="recherche.html" class="nav-button active">Recherche</a>
-                    <a href="#" class="nav-button">Carte</a>
-                    <a href="#" class="nav-button">Connexion</a>
+                    <a href="carte.html" class="nav-button">Carte</a>
+                    <a href="../../back/connexion.php" class="nav-button">Connexion</a>
 			    </div>
 			</nav>
         </header>
-    <div>
 
-        <h3>
-        Rechercher une Installation
-        </h3>
-        <br>
-        <!-- Différents filtres de sélection-->
-        <form id="selection">
-            <label for="selp">Panneau: </label><select name="PanneauS" id="panneau">
-                <option id="any">any</option>
-            </select>
-            <label for="seli">Onduleur: </label><select name="OnduleurS" id="onduleur">
-                <option id="any">any</option>
-            </select>
-            <label for="seld">Département: </label><select name="DepartementS" id="departement">
-                <option id="any">any</option>
-            </select>
-            <input type="submit">
-        </form>
-        <br>
-        <!--Liste des résultats-->
-        <table id="list">
-           
+
+          
+
+
+
+
+            <main id="page" class="container my-5">
+            <h1 id="a">Recherche d'installations</h1>
+
+            <form id="searchForm" class="search-form p-4 rounded shadow">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="marqueOnduleur" class="form-label">
+                            <i class="fas fa-microchip me-2"></i>Marque d'onduleur
+                        </label>
+                        <select id="marqueOnduleur" class="form-select">
+                            <option value="">-- Choisir --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="marquePanneau" class="form-label">
+                            <i class="fas fa-solar-panel me-2"></i>Marque de panneau
+                        </label>
+                        <select id="marquePanneau" class="form-select">
+                            <option value="">-- Choisir --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="departement" class="form-label">
+                            <i class="fas fa-map-marker-alt me-2"></i>Département
+                        </label>
+                        <select id="departement" class="form-select">
+                            <option value="">-- Choisir --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn-custom-search">Rechercher</button>
+
+
+
+                </div>
+            </form>
             
 
+            <table id="resultatsTable" class="table mt-4 d-none">
+                <thead>
+                    <tr>
+                        <th>Localité</th>
+                        <th>Département</th>
+                        <th>Puissance (kWc)</th>
+                        <th>Détail</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-        </table>
 
-    </div>
-    <br>
-    
-      <!-- Footer -->
+            <div id="error-message" class="d-none"></div>
+
+
+            <div id="resultats" class="mt-5"></div>
+        </main>
+
+
+
+
+
+
+
+         <!-- Footer -->
         <footer class="footer-custom">
             <div class="footer-content">
                 <!-- Gauche : Noms avec LinkedIn -->
@@ -97,8 +138,5 @@
                 </div>
             </div>
         </footer>
-        <script src="../../js/ajax.js"></script>
-    <script src="../../js/recherche.js"></script>
-
-</body>
+    </body>
 </html>
