@@ -3,7 +3,7 @@
 require_once('config/database.php');
 
   ///Used to find information about an installation that has a specific id
-  function dbRequestInstallation($db, $id = '')
+  function dbRequestInstallation($pdo, $id = '')
 {
     try
     {
@@ -15,7 +15,7 @@ require_once('config/database.php');
         INNER JOIN Departement d ON d.code = c.code
         INNER JOIN Region r ON r.code = d.code_Region
         WHERE i.id=:id';
-      $statement = $db->prepare($request);
+      $statement = $pdo->prepare($request);
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ require_once('config/database.php');
 }
 
 ///Lists all installations that match the filters
- function dbListInstallation($db, $departement='any', $onduleur='any' ,$panneau='any', $count=50 )
+ function dbListInstallation($pdo, $departement='any', $onduleur='any' ,$panneau='any', $count=50 )
 {
     try
     {
@@ -54,7 +54,7 @@ require_once('config/database.php');
         }
 
       $request .= "LIMIT :count;";
-      $statement = $db->prepare($request);
+      $statement = $pdo->prepare($request);
 
 
       //adds the filters' values
@@ -81,18 +81,19 @@ require_once('config/database.php');
 }
 
 ///gets a specific amount of random values to be used as filter options
-function dbGetRandomValues($db,$count=20){
+function dbGetRandomValues($pdo,$count=20){
   try
     {
-        $request = ' SELECT DISTINCT d.nom, p.nom, o.nom FROM Installation i
+        $request = ' SELECT DISTINCT d.nom AS departement , p.nom AS panneau, o.nom AS onduleur FROM Installation i
         INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
         INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
         INNER JOIN Communes c ON c.code_insee = i.code_insee
         INNER JOIN Departement d ON d.code = c.code
-        ORDER BY RANDOM()
+        
+        ORDER BY RAND()
         LIMIT :count;';
-      $statement = $db->prepare($request);
-        $statement->bindParam(':count', $count);
+      $statement = $pdo->prepare($request);
+        $statement->bindParam(':count', $count, PDO::PARAM_INT);
       $statement->execute();
       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $result;}

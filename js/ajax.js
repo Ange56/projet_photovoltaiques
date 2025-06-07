@@ -2,11 +2,12 @@ function request(method,api,callback,data=null){
 
     // Create XML HTTP request.
  let xhr = new XMLHttpRequest();
-   if (method === 'GET' && data != null)
-  {api += '?' + data}
+   if (method === 'GET' && data != null) {
+    api += '?id=' + data
+   }
  xhr.open(method,api);
  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
+ 
  // Add onload function.
  xhr.onload = () => {
  switch (xhr.status) {
@@ -17,5 +18,5 @@ default: console.log('HTTP error: ' + xhr.status);
  }};
 
  // Send XML HTTP request.
- xhr.send();
+ xhr.send(data);
 }

@@ -77,7 +77,7 @@ window.addEventListener("load",function(){
 
     info.innerText+= id
 
-    request("GET",'../../api/recherche.php/installation',display,id)
+    request("GET",'/projet_photovoltaiques/api/recherche.php/installation',display,id)
 
 
     installationButton.onclick = installationMenu.toggle('d-none');
