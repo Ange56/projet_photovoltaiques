@@ -100,7 +100,7 @@ function display(installation){
         "</tr>"+
     "<tr>" +
         "<td>Zone administrative</td>" +
-        "<td>"+installation['administrative_area_level_1']+installation['administrative_area_level_2']+installation['administrative_area_level_3']+installation['administrative_area_level_4']+"</td>" +
+        "<td>"+installation['administrative_area_level_1']+"/"+installation['administrative_area_level_2']+"/"+installation['administrative_area_level_3']+"/"+installation['administrative_area_level_4']+"</td>" +
         "</tr>"+
         "<tr>" +
     "<tr>" +

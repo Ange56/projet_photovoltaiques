@@ -60,9 +60,23 @@ body, html {
 td, tr, table {  border: 2px solid #06919b; /* bordure extérieure */}
 
 select{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
-button{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
 
-button:hover{background-color: skyblue;}
+button {
+  padding: 0.3rem;
+  background-color: #d6d8d9;
+  color: black;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+
+button:hover,button.active {
+  background-color: #b9bbbe;
+}
+
+
 
 /* ------------ FOOTER -------------- */
 .footer-custom {
