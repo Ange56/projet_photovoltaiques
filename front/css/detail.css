@@ -49,15 +49,21 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  justify-items: center;
 }
 body, html {
   margin: 0;
   padding: 0;
 }
 
+
+
+
+
+
 /*--------------TABLE & FORM--------------*/
 
-td, tr, table {  border: 2px solid #06919b; /* bordure extérieure */}
+td, tr, table {  border: 2px solid #06919b; /* bordure extérieure */; text-align: center}
 
 select{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
 
