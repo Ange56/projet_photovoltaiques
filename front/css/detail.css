@@ -57,7 +57,7 @@ body, html {
 
 /*--------------TABLE & FORM--------------*/
 
-td, tr, table {padding: 0.3rem; border-color:steelblue; border-style:  solid; border-width:  0.1rem;}
+td, tr, table {  border: 2px solid #06919b; /* bordure extérieure */}
 
 select{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
 button{background-color:lightgray; border-radius: 10%; border: none; padding: 0.3rem}
