@@ -99,7 +99,7 @@ switch ($action) {
         break;
 
 
-    //---------------------------PAGE RECHERCHE-----------------------------------
+    //---------------------------PAGE CARTE-----------------------------------
 
     // Filtres pour le formulaire (année + département)
     case 'filters':
@@ -183,9 +183,7 @@ switch ($action) {
             $marque_panneau = $_GET['marque_panneau'] ?? null;
             $departement = $_GET['departement'] ?? null;
             $nombre = $_GET['nombre'] ?? 50;
-            $position= $_GET['position'] ?? 0;
-
-
+            $position= ((int)$_GET['position']*(int)$nombre) ?? 0;
 
             // Construction de la requête avec les filtres
             $sql = "
@@ -206,31 +204,45 @@ switch ($action) {
                 WHERE 1=1
             ";
 
-            $params = [];
-
             // Ajout des filtres selon les paramètres reçus
-            if ($marque_onduleur) {
-                $sql .= " AND mo.nom = :marque_onduleur";
-                $params['marque_onduleur'] = $marque_onduleur;
+        if ($marque_onduleur!=null) {
+            $sql .= " AND mo.nom = :marque_onduleur ";
+        }
+
+        if ($marque_panneau!=null) {
+            $sql .= " AND mp.nom = :marque_panneau ";
             }
 
-            if ($marque_panneau) {
-                $sql .= " AND mp.nom = :marque_panneau";
-                $params['marque_panneau'] = $marque_panneau;
-            }
+        if ($departement!=null) {
+            $sql .= " AND d.nom = :departement ";
+        }
 
-            if ($departement) {
-                $sql .= " AND d.code = :departement";
-                $params['departement'] = $departement;
-            }
-
-            $params['nombre'] = $nombre;
-            $params['debut'] = $debut;
-
-            $sql .= " ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut";
+            $sql .= "ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :position;";
 
             $stmt = $pdo->prepare($sql);
-            $stmt->execute($params);
+
+        if ($marque_onduleur!=null) {
+            $stmt->bindParam(':marque_onduleur', $marque_onduleur);
+        }
+
+        if ($marque_panneau!=null) {
+            $stmt->bindParam(':marque_panneau', $marque_panneau);
+        }
+
+
+        if ($departement!=null) {
+            $stmt->bindParam(':departement', $departement);
+        }
+
+        $stmt->bindParam(':position', $position, PDO::PARAM_INT);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_INT);
+
+
+
+            $stmt->execute();
+
+
+
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
             break;
 
