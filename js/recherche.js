@@ -69,9 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const avant= document.getElementById("avant");
         const apres= document.getElementById("apres");
         const positionInfo = document.getElementById("positionInfo");
+        const nombreInfo = document.getElementById("nombre")
 
-        let nombre= 50;
         let position = 0;
+        let nombre = nombreInfo.value
+
 
         document.getElementById("pagination").classList.remove("d-none")
 
@@ -80,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         avant.onclick = () => {position--; results()};
         apres.onclick = () => {position++; results()};
         positionInfo.oninput = () => {position = positionInfo.value; results()}
+        positionInfo.oninput = () => {position = positionInfo.value; results()}
+        nombreInfo.oninput = () => {nombre =  nombreInfo.value; results()}
 
 
         const params = new URLSearchParams({
@@ -87,13 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ...(marqueOnduleur && { marque_onduleur: marqueOnduleur }),
             ...(marquePanneau && { marque_panneau: marquePanneau }),
             ...(departement && { departement: departement }),
-            ...(nombre && { nombre: nombre })});
+            });
 
         //affiche la page actuelle et son contenu
         async function results(){
             nombre=document.getElementById("nombre").value
             positionInfo.value=position;
-            const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}&position=`);
+            const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}&position=`+position+"&nombre="+nombre);
             const errorDiv = document.getElementById('error-message');
             errorDiv.classList.add('d-none');
             errorDiv.textContent = "";
