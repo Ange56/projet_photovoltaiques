@@ -61,32 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const marqueOnduleur = marqueOnduleurSelect.value;
     const marquePanneau = marquePanneauSelect.value;
     const departement = departementSelect.value;
-    const debut= document.getElementById("debut");
-    const avant= document.getElementById("avant");
-    const apres= document.getElementById("apres");
-    const fin= document.getElementById("fin");
-
-    let nombre= document.getElementById("nombre").value
-    let position = 0;
-
-
-
-    debut.onclick = () => {position=0; results()};
-    avant.onclick = () => {position--; results()};
-    apres.onclick = () => {position++; results()};
-    fin.onclick = () => {position=0; results()};
-
 
     const params = new URLSearchParams({
         action: "recherche_installations",
         ...(marqueOnduleur && { marque_onduleur: marqueOnduleur }),
         ...(marquePanneau && { marque_panneau: marquePanneau }),
-        ...(departement && { departement: departement }),
-        ...(position && { position: position }),
-        ...(nombre && { nombre: nombre })
+        ...(departement && { departement: departement })
     });
 
-    async function results(){
     const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}`);
     const errorDiv = document.getElementById('error-message');
     errorDiv.classList.add('d-none');
@@ -112,11 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.appendChild(row);
     });
 
-    table.classList.remove('d-none');}
+    table.classList.remove('d-none');
 });
-
-
-
 
     // Démarrage
     loadFiltres();
