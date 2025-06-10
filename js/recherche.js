@@ -66,15 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const apres= document.getElementById("apres");
     const fin= document.getElementById("fin");
 
-    let nombre= document.getElementById("nombre");
+    let nombre= document.getElementById("nombre").value
     let position = 0;
 
 
 
-
-
-
-        //Pour que les boutons changent la page
     debut.onclick = () => {position=0; results()};
     avant.onclick = () => {position--; results()};
     apres.onclick = () => {position++; results()};
@@ -87,7 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ...(marquePanneau && { marque_panneau: marquePanneau }),
         ...(departement && { departement: departement }),
         ...(position && { position: position }),
-        ...(nombre && { nombre: nombre })});
+        ...(nombre && { nombre: nombre })
+    });
 
     async function results(){
     const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}`);
@@ -116,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     table.classList.remove('d-none');}
-        await results()
 });
 
 
