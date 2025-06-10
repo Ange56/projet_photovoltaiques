@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apres= document.getElementById("apres");
     const positionInfo = document.getElementById("positionInfo");
 
-    let nombre= document.getElementById("nombre").value;
+    let nombre= 50;
     let position = 0;
 
     document.getElementById("pagination").classList.remove("d-none")
@@ -91,8 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //affiche la page actuelle et son contenu
     async function results(){
+        nombre=document.getElementById("nombre").value
         positionInfo.value=position;
-    const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}&position=`+position);
+    const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}&position=`);
     const errorDiv = document.getElementById('error-message');
     errorDiv.classList.add('d-none');
     errorDiv.textContent = "";
