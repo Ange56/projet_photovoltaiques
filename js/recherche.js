@@ -57,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async e => {
     e.preventDefault();
     console.log("Formulaire soumis !");
+
+
+
+
     
     const marqueOnduleur = marqueOnduleurSelect.value;
     const marquePanneau = marquePanneauSelect.value;
@@ -64,21 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const debut= document.getElementById("debut");
     const avant= document.getElementById("avant");
     const apres= document.getElementById("apres");
-    const fin= document.getElementById("fin");
+    const positionInfo = document.getElementById("positionInfo");
 
-    let nombre= document.getElementById("nombre");
+    let nombre= document.getElementById("nombre").value;
     let position = 0;
 
+    document.getElementById("pagination").classList.remove("d-none")
 
-
-
-
-
-        //Pour que les boutons changent la page
+        //Pour que les boutons et l'input changent la page
     debut.onclick = () => {position=0; results()};
     avant.onclick = () => {position--; results()};
     apres.onclick = () => {position++; results()};
-    fin.onclick = () => {position=0; results()};
+    positionInfo.oninput = () => {position = positionInfo.value; results()}
 
 
     const params = new URLSearchParams({
@@ -86,11 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ...(marqueOnduleur && { marque_onduleur: marqueOnduleur }),
         ...(marquePanneau && { marque_panneau: marquePanneau }),
         ...(departement && { departement: departement }),
-        ...(position && { position: position }),
         ...(nombre && { nombre: nombre })});
 
+    //affiche la page actuelle et son contenu
     async function results(){
-    const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}`);
+        positionInfo.value=position;
+    const data = await fetchData(`../../api/endpoints/get.php?${params.toString()}&position=`+position);
     const errorDiv = document.getElementById('error-message');
     errorDiv.classList.add('d-none');
     errorDiv.textContent = "";

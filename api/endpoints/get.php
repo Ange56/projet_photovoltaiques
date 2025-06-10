@@ -183,7 +183,7 @@ switch ($action) {
             $marque_panneau = $_GET['marque_panneau'] ?? null;
             $departement = $_GET['departement'] ?? null;
             $nombre = $_GET['nombre'] ?? 50;
-            $debut= $_GET['debut'] ?? 0;
+            $position= $_GET['position'] ?? 0;
 
 
 
@@ -212,6 +212,7 @@ switch ($action) {
             if ($marque_onduleur) {
                 $sql .= " AND mo.nom = :marque_onduleur";
                 $params['marque_onduleur'] = $marque_onduleur;
+
             }
 
             if ($marque_panneau) {
@@ -224,14 +225,20 @@ switch ($action) {
                 $params['departement'] = $departement;
             }
 
-            $sql .= "ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut;";
-
-            $params['debut'] = (int)$debut * (int)$nombre;
-            $params['nombre'] = (int)$nombre;
+            $sql .= "ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :position;";
 
             $stmt = $pdo->prepare($sql);
 
-            $stmt->execute($params);
+        // Ajout des filtres selon les paramètres reçus
+
+            foreach ($params as $key => $value) {$stmt->bindParam($key, $value);}
+
+
+            $stmt->bindParam('position', $position, PDO::PARAM_INT);
+            $stmt->bindParam('nombre', $nombre, PDO::PARAM_INT);
+
+
+            $stmt->execute();
 
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
             break;
