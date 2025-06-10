@@ -1,10 +1,6 @@
-///param installation the details of an installation
-///removes all the nulls in the result
 
-
-
-///param installation the details of an installation
-///displays the details of an installation
+///param installation des détails d'une installtion
+///affiche les détails d'une installation
 function display(installation){
     let installationMenu = document.getElementById("installationm");
     let placementMenu = document.getElementById("placementm");
@@ -14,10 +10,10 @@ function display(installation){
 
     let infodoc= document.getElementById("infodoc");
 
-    //adds the id of the document
+    //ajoute l'id du document
     infodoc.innerText+= " "+installation['iddoc']
 
-    //adds the different sections and their content
+    //ajoute les différentes sections et leur contenu
     installationMenu.innerHTML+=
     "<tr>" +
         "<td>Date d'installation</td>" +
@@ -123,7 +119,7 @@ function display(installation){
         "</tr>"
 }
 
-///fetches the information about the selected installation to display and gives the buttons their functionality
+///récupère les informations sur l'installation choisie à afficher et donne aux boutons leurs fonctionnalités
 window.addEventListener("load",function(){
 
     let urlParams= new URLSearchParams(this.window.location.search);

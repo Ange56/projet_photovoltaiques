@@ -1,78 +1,95 @@
+Panoneau
 
-# Panoneau
-
-An innovative website for learning and managing the solar panel technology
-
-
-## Description:
-
-This website is used to find out more about solar panels, generally in France. 
-Thanks to it, you can find out stats and information including their location, components and power 
-as well as adding and editing information if you're an admin.
+Un site web innovant pour apprendre et gérer la technologie des panneaux solaires
 
 
-## Functionalities:
+## Description :
 
-The project is composed as follows:
+Ce site permet d'en savoir plus sur les panneaux solaires, généralement en France.
+Grâce à lui, vous pouvez obtenir des statistiques et des informations telles que leur localisation, leurs composants et leur puissance
+ainsi que l'ajout et l'édition d'informations si vous êtes administrateur.
 
--A client side where you can only read information
 
--An admin side where you can edit, add and remove data 
+## Fonctionnalités :
 
-### Client side (front folder)
+Le projet est composé comme suit :
+
+– Un côté client où vous ne pouvez que lire les informations
+
+– Un côté administrateur où vous pouvez éditer, ajouter et supprimer des données.
+
+### Côté client (dossier principal)
 
 #### -Home page (accueil)
-main page of the website.
+Page principale du site web.
 
-Here you can read some stats about solar panels and how they were installed.
+Vous pouvez y lire des statistiques sur les panneaux solaires et la manière dont ils ont été installés.
 
-On the header you can as well find several buttons leading to the different pages of the website.
+Dans l'en-tête, vous trouverez également plusieurs boutons menant aux différentes pages du site web.
 
 #### -Search page (recherche)
-List of all installed solar panels
+Liste de tous les panneaux solaires installés
 
-In this page you can see the list of solar panel systems, information such as their surface, number of solar panels and power
-That list can be filtered by department, panel and inverter brand.
-To do so pick in each form select the option you want the "--choisir--" one being used to not filter that category
+Sur cette page, vous pouvez voir la liste des systèmes de panneaux solaires, des informations telles que leur surface, le nombre de panneaux solaires et la puissance. Cette liste peut être filtrée par département, par marque de panneau et d'onduleur.
+Pour ce faire, sélectionnez dans chaque formulaire l'option que vous souhaitez, l'option "--choisir--" étant utilisée pour ne pas filtrer cette catégorie.
 
-if you click on one of the systems' "detail" button you are led to a page with more detailed information about that specific solar panel system
+Si vous cliquez sur le bouton "détail" de l'un des systèmes, vous accédez à une page contenant des informations plus détaillées sur ce système de panneaux solaires spécifique.
 
-#### -Detail page 
-Page used to give additional detail about a specific solar panel system
+En soumettant les filtres, des boutons apparaissent :
 
-All the information is grouped in different sections that u can show/hide with their corresponding buttons
+— Le "0" zero est pour aller à la première page.
 
-The sections are as follows:
+— Le bouton "<" est pour reculer d'une page.
 
--"Installation": generic information about that system:
+— Le bouton ">" pour avancer d'une page.
 
--"Placement": additional information about the system, mostly focusing on how it was installed, like in what angle or what company installed it.
+L'input du milieu permet d'entrer une page spécifique.
 
--"Adresse": Precise information about where the solar panel system was placed, in terms of locality, department, coordinates
+L'input du bas permet de choisir le nombre d'installations par page.
 
--"Panneau": information about how many and what kind of panels were used for that system
+#### – Detail page
+Page utilisée pour donner des détails supplémentaires sur un système de panneaux solaires spécifique.
 
--"Onduleur": information about how many and what kind of inverters were used for that system
+Toutes les informations sont regroupées dans différentes sections que vous pouvez afficher/masquer à l'aide des boutons correspondants.
+
+Les sections sont les suivantes
+
+– Installation" : informations générales sur ce système :
+
+– Placement" : informations supplémentaires sur le système, principalement axées sur la manière dont il a été installé, comme l'angle ou l'entreprise qui l'a installé.
+
+– Adresse" : Informations précises sur l'endroit où le système de panneaux solaires a été placé, en termes de localité, de département et de coordonnées.
+
+– Panneau" : informations sur le nombre et le type de panneaux utilisés pour ce système.
+
+– Onduleur" : informations sur le nombre et le type d'onduleurs utilisés pour ce système.
 
 #### -Map page (carte)
-A map of the solar panel systems' location positions
+Une carte de l'emplacement des systèmes de panneaux solaires.
 
-with this map you can get an overview of where the different systems are
+Cette carte vous permet d'obtenir une vue d'ensemble de l'emplacement des différents systèmes.
 
-you can as well pick a specific department or date, also with selects
+Vous pouvez également choisir un département ou une date spécifique, également avec des sélections.
 
-### Admin side (back folder)
+### Côté administration (dossier arrière)
 
-#### login page (connexion)
-to access the 'back' side of the website you need to be logged, it's this page's purpose
+#### Page de connexion (connexion)
+Pour accéder à la partie « arrière » du site web, vous devez être connecté, c'est l'objectif de cette page.
 
-to login, type in your email, password and submit
+Pour vous connecter, saisissez votre adresse électronique, votre mot de passe et cliquez sur « Envoyer ».
 
-#### home page (accueil)
-the home page of the 'back' side of the website
+#### Home page (accueil)
+La page d'accueil de la partie « arrière » du site web.
 
-here you can find all information about the solar panel sytems
+Ici, vous pouvez trouver toutes les informations sur les systèmes de panneaux solaires.
 
-you can as well add new entries by filling in the different inputs
+Vous pouvez également ajouter de nouvelles entrées en remplissant les différents champs.
 
-## How to use:
+## Comment utiliser :
+
+1-taper l'url de la machine virtuelle dans l'url
+
+2-voue êtes arrivé sur la page d'accueil, les boutons vous mènent aux différentes pages du site
+
+
+Github: https://github.com/Ange56/projet_photovoltaiques

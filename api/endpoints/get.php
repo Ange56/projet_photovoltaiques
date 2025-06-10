@@ -182,6 +182,10 @@ switch ($action) {
             $marque_onduleur = $_GET['marque_onduleur'] ?? null;
             $marque_panneau = $_GET['marque_panneau'] ?? null;
             $departement = $_GET['departement'] ?? null;
+            $nombre = $_GET['nombre'] ?? 50;
+            $position= $_GET['position'] ?? 0;
+
+
 
             // Construction de la requête avec les filtres
             $sql = "
@@ -220,7 +224,10 @@ switch ($action) {
                 $params['departement'] = $departement;
             }
 
-            $sql .= " ORDER BY i.an_installation DESC LIMIT 50";
+            $params['nombre'] = $nombre;
+            $params['debut'] = $debut;
+
+            $sql .= " ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
