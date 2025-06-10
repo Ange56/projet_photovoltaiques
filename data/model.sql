@@ -59,7 +59,7 @@ CREATE TABLE Installateur(
 #------------------------------------------------------------
 
 CREATE TABLE Communes(
-    code_insee Int NOT NULL,
+    code_insee VARCHAR(10) NOT NULL,
     nom_standard Varchar(50) NOT NULL,
     code_postal Int NOT NULL,
     code_postal_suffix Int,
@@ -142,7 +142,7 @@ CREATE TABLE Installation(
     political Varchar(50),
     id_Installateur Int,
     id_onduleur Int NOT NULL,
-    code_insee Int,
+    code_insee VARCHAR(10) NOT NULL,
     id_panneau Int NOT NULL,
     CONSTRAINT Installation_PK PRIMARY KEY (id),
     CONSTRAINT Installation_Installateur_FK FOREIGN KEY (id_Installateur) REFERENCES Installateur(id),
