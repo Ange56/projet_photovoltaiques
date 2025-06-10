@@ -224,22 +224,14 @@ switch ($action) {
                 $params['departement'] = $departement;
             }
 
+            $sql .= "ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut;";
 
-            $params['nombre'] = $nombre;
-            $params['debut'] = $debut*$nombre;
-
-
-
-            $sql .= "ORDER BY i.an_installation DESC LIMIT :debut,:nombre";
+            $params['debut'] = (int)$debut * (int)$nombre;
+            $params['nombre'] = (int)$nombre;
 
             $stmt = $pdo->prepare($sql);
 
-
-
-
             $stmt->execute($params);
-
-            echo $stmt->queryString;
 
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
             break;
