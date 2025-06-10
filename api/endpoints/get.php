@@ -185,6 +185,8 @@ switch ($action) {
             $nombre = $_GET['nombre'] ?? 50;
             $debut= $_GET['debut'] ?? 0;
 
+
+
             // Construction de la requête avec les filtres
             $sql = "
                 SELECT 
@@ -222,13 +224,23 @@ switch ($action) {
                 $params['departement'] = $departement;
             }
 
-            $params['nombre'] = $nombre;
-            $params['debut'] = $debut;
 
-            $sql .= " ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut";
+            $params['nombre'] = $nombre;
+            $params['debut'] = $debut*$nombre;
+
+
+
+            $sql .= "ORDER BY i.an_installation DESC LIMIT :debut,:nombre";
 
             $stmt = $pdo->prepare($sql);
+
+
+
+
             $stmt->execute($params);
+
+            echo $stmt->queryString;
+
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
             break;
 
