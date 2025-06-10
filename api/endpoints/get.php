@@ -99,7 +99,7 @@ switch ($action) {
         break;
 
 
-    //---------------------------PAGE CARTE-----------------------------------
+    //---------------------------PAGE RECHERCHE-----------------------------------
 
     // Filtres pour le formulaire (année + département)
     case 'filters':
@@ -182,8 +182,6 @@ switch ($action) {
             $marque_onduleur = $_GET['marque_onduleur'] ?? null;
             $marque_panneau = $_GET['marque_panneau'] ?? null;
             $departement = $_GET['departement'] ?? null;
-            $nombre = $_GET['nombre'] ?? 50;
-            $debut= $_GET['debut'] ?? 0;
 
             // Construction de la requête avec les filtres
             $sql = "
@@ -222,10 +220,7 @@ switch ($action) {
                 $params['departement'] = $departement;
             }
 
-            $params['nombre'] = $nombre;
-            $params['debut'] = $debut;
-
-            $sql .= " ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :debut";
+            $sql .= " ORDER BY i.an_installation DESC LIMIT 50";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
