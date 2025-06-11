@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const marker = L.marker([install.lat, install.long]).addTo(markersLayer);
                     marker.bindPopup(`
                         <strong>${install.localite}</strong><br>
-                        Puissance : ${install.puissance_crete} kWc<br>
-                        <a href="detail.php?id=${install.id}">Voir détail</a>
+                        Puissance : ${install.puissance_crete} W<br>
+                        <a href="../detail.html?nid=${install.id}">Voir détail</a>
                     `);
                 });
 
