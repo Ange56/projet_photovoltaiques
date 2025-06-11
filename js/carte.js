@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-    //  Quand une année est sélectionnée → charger les départements
+    // 🔹 Quand une année est sélectionnée → charger les départements
     anneeSelect.addEventListener('change', () => {
         const selectedYear = anneeSelect.value;
         departementSelect.innerHTML = '<option disabled selected>Chargement...</option>';
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Soumission du formulaire → charger les points sur la carte
+    // 🔹 Soumission du formulaire → charger les points sur la carte
     form.addEventListener('submit', e => {
         e.preventDefault();
         const annee = anneeSelect.value;

@@ -2,7 +2,7 @@
 class Database {
     private $host = "localhost";
     private $db_name = "panoneau";
-    private $username = "root";
+    private $username = "admin";
     private $password = "isen44";
     public $conn;
 
