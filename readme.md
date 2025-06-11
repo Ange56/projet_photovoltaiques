@@ -1,95 +1,79 @@
-Panoneau
+# Panoneau  
 
-Un site web innovant pour apprendre et gérer la technologie des panneaux solaires
+## Description
 
-
-## Description :
-
-Ce site permet d'en savoir plus sur les panneaux solaires, généralement en France.
-Grâce à lui, vous pouvez obtenir des statistiques et des informations telles que leur localisation, leurs composants et leur puissance
-ainsi que l'ajout et l'édition d'informations si vous êtes administrateur.
+**Panoneau** est une application web conçue pour la **gestion des installations photovoltaïques chez les particuliers**.
+Elle permet de **centraliser les données** relatives aux systèmes solaires, de **visualiser leur répartition géographique** et d'**obtenir des statistiques** sur leur déploiement en France.
+L’application propose une interface publique pour la consultation des données et une interface administrateur pour la gestion complète des installations.
 
 
-## Fonctionnalités :
+## Fonctionnalités
 
-Le projet est composé comme suit :
+Le projet est structuré en deux parties distinctes :
 
-– Un côté client où vous ne pouvez que lire les informations
+- **Côté client** : lecture seule des données.
+- **Côté administrateur** : gestion complète des données (ajout, modification, suppression, visualisation).
 
-– Un côté administrateur où vous pouvez éditer, ajouter et supprimer des données.
+---
 
-### Côté client (dossier principal)
+### Côté client
 
-#### -Home page (accueil)
-Page principale du site web.
+#### Page Accueil
+Page principale du site.  
+Elle affiche des statistiques générales sur les installations photovoltaïques, avec un en-tête contenant des boutons de navigation vers les autres pages.
 
-Vous pouvez y lire des statistiques sur les panneaux solaires et la manière dont ils ont été installés.
+#### Page Recherche
+Affiche la liste de toutes les installations solaires connues.  
+Chaque entrée présente la surface, la puissance, le nombre de panneaux, etc.  
+Filtres disponibles : **département**, **marque de panneau**, **marque d'onduleur**.
 
-Dans l'en-tête, vous trouverez également plusieurs boutons menant aux différentes pages du site web.
+Vous pouvez accéder à la **page Détail** d’une installation via le bouton « Détail ».
 
-#### -Search page (recherche)
-Liste de tous les panneaux solaires installés
+Système de pagination intégré :
+- « 0 » : aller à la première page
+- « < » / « > » : page précédente / suivante
+- Champ pour entrer un numéro de page spécifique
+- Champ pour définir le nombre d’installations affichées par page
 
-Sur cette page, vous pouvez voir la liste des systèmes de panneaux solaires, des informations telles que leur surface, le nombre de panneaux solaires et la puissance. Cette liste peut être filtrée par département, par marque de panneau et d'onduleur.
-Pour ce faire, sélectionnez dans chaque formulaire l'option que vous souhaitez, l'option "--choisir--" étant utilisée pour ne pas filtrer cette catégorie.
+#### Page Détail
+Affiche toutes les informations détaillées d’un système photovoltaïque, organisées en sections pliables :
+- **Installation** : informations générales
+- **Placement** : méthode d’installation, angle, installateur
+- **Adresse** : localisation précise
+- **Panneau** : type et nombre de panneaux
+- **Onduleur** : type et nombre d’onduleurs
 
-Si vous cliquez sur le bouton "détail" de l'un des systèmes, vous accédez à une page contenant des informations plus détaillées sur ce système de panneaux solaires spécifique.
+#### Page Carte
+Carte interactive affichant l’emplacement des installations.  
+Filtres disponibles : **département** et **date d’installation**.
 
-En soumettant les filtres, des boutons apparaissent :
+---
 
-— Le "0" zero est pour aller à la première page.
+### Côté administrateur
 
-— Le bouton "<" est pour reculer d'une page.
+#### Page de Connexion
+Accès sécurisé à la partie administrateur via email et mot de passe.
 
-— Le bouton ">" pour avancer d'une page.
+#### Page Accueil (Admin)
+Page principale de la partie « back office ».
 
-L'input du milieu permet d'entrer une page spécifique.
+Fonctionnalités :
+- **Ajouter une nouvelle installation** en remplissant un formulaire.
+- **Modifier** une installation existante.
+- **Supprimer** une installation.
+- **Consulter les détails** d'une installation comme sur le côté client.
 
-L'input du bas permet de choisir le nombre d'installations par page.
+---
 
-#### – Detail page
-Page utilisée pour donner des détails supplémentaires sur un système de panneaux solaires spécifique.
+## Comment utiliser
 
-Toutes les informations sont regroupées dans différentes sections que vous pouvez afficher/masquer à l'aide des boutons correspondants.
+1. Accédez à l’URL de la machine virtuelle dans votre navigateur.
+2. Vous arrivez sur la page d’accueil publique.
+3. Naviguez via les boutons du menu.
+4. Pour accéder à l’administration, connectez-vous via la page de connexion avec vos identifiants.
 
-Les sections sont les suivantes
+---
 
-– Installation" : informations générales sur ce système :
+### GitHub
 
-– Placement" : informations supplémentaires sur le système, principalement axées sur la manière dont il a été installé, comme l'angle ou l'entreprise qui l'a installé.
-
-– Adresse" : Informations précises sur l'endroit où le système de panneaux solaires a été placé, en termes de localité, de département et de coordonnées.
-
-– Panneau" : informations sur le nombre et le type de panneaux utilisés pour ce système.
-
-– Onduleur" : informations sur le nombre et le type d'onduleurs utilisés pour ce système.
-
-#### -Map page (carte)
-Une carte de l'emplacement des systèmes de panneaux solaires.
-
-Cette carte vous permet d'obtenir une vue d'ensemble de l'emplacement des différents systèmes.
-
-Vous pouvez également choisir un département ou une date spécifique, également avec des sélections.
-
-### Côté administration (dossier arrière)
-
-#### Page de connexion (connexion)
-Pour accéder à la partie « arrière » du site web, vous devez être connecté, c'est l'objectif de cette page.
-
-Pour vous connecter, saisissez votre adresse électronique, votre mot de passe et cliquez sur « Envoyer ».
-
-#### Home page (accueil)
-La page d'accueil de la partie « arrière » du site web.
-
-Ici, vous pouvez trouver toutes les informations sur les systèmes de panneaux solaires.
-
-Vous pouvez également ajouter de nouvelles entrées en remplissant les différents champs.
-
-## Comment utiliser :
-
-1-taper l'url de la machine virtuelle dans l'url
-
-2-voue êtes arrivé sur la page d'accueil, les boutons vous mènent aux différentes pages du site
-
-
-Github: https://github.com/Ange56/projet_photovoltaiques
+Code source disponible ici : [https://github.com/Ange56/projet_photovoltaiques](https://github.com/Ange56/projet_photovoltaiques)
