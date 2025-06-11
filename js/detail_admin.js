@@ -1,7 +1,6 @@
 
-///param installation des détails d'une installtion
-///affiche les détails d'une installation
-
+///param installation the details of an installation
+///displays the details of an installation
 function display(installation){
     let installationMenu = document.getElementById("installationm");
     let placementMenu = document.getElementById("placementm");
@@ -11,11 +10,10 @@ function display(installation){
 
     let infodoc= document.getElementById("infodoc");
 
-    //ajoute l'id du document
+    //adds the id of the document
     infodoc.innerText+= " "+installation['iddoc']
 
-    //ajoute les différentes sections et leur contenu
-
+    //adds the different sections and their content
     installationMenu.innerHTML+=
     "<tr>" +
         "<td>Date d'installation</td>" +
@@ -121,8 +119,7 @@ function display(installation){
         "</tr>"
 }
 
-///récupère les informations sur l'installation choisie à afficher et donne aux boutons leurs fonctionnalités
-
+///fetches the information about the selected installation to display and gives the buttons their functionality
 window.addEventListener("load",function(){
 
     let urlParams= new URLSearchParams(this.window.location.search);
@@ -147,7 +144,7 @@ window.addEventListener("load",function(){
     info.innerText+= " "+id;
 
 
-    request("GET",'../../api/endpoints/get.php?action=installation_detail',display,id);
+    request("GET",'../api/endpoints/get.php?action=installation_detail',display,id);
 
     installationButton.onclick = function(){installationMenu.classList.toggle('d-none')};
     placementButton.onclick = function(){placementMenu.classList.toggle('d-none')};
@@ -156,4 +153,3 @@ window.addEventListener("load",function(){
     ondulateurButton.onclick = function(){ondulateurMenu.classList.toggle('d-none')};
 
 })
-

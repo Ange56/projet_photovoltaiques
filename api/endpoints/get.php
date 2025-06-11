@@ -12,7 +12,7 @@ $action = $_GET['action'] ?? 'all';
 
 switch ($action) {
 
-<<<<<<< HEAD
+
     // Statistiques générales (nécessaire pour votre page d'accueil)
     case 'stats_generales':
         $allStats = [];
@@ -32,9 +32,6 @@ switch ($action) {
         
         echo json_encode($allStats);
         break;
-
-
-
         
     case 'installations_par_annee':
         // Nombre d'installations par année
@@ -76,6 +73,7 @@ switch ($action) {
         break;
 
     //---------------------------PAGE DETAIL-----------------------------------
+
     // Détail d'une installation
     case 'installation_detail':
         $id = $_GET['id'] ?? null;
@@ -100,10 +98,7 @@ switch ($action) {
         break;
 
 
-    //---------------------------PAGE CARTE-----------------------------------
 
-    // Filtres pour le formulaire (année + département)
-=======
     //---------------------------PAGE CARTE-----------------------------------
     //  Liste de 20 années au hasard
     case 'annees':
@@ -148,15 +143,10 @@ switch ($action) {
         $filters = [];
 
         $stmt1 = $pdo->query("
-<<<<<<< HEAD
-            SELECT DISTINCT YEAR(an_installation) AS annee
-            FROM Installation
-            ORDER BY annee DESC
-=======
+
             SELECT DISTINCT an_installation AS annee
             FROM Installation
             ORDER BY RAND()
->>>>>>> Tallulah
             LIMIT 20
         ");
         $filters['annees'] = $stmt1->fetchAll(PDO::FETCH_ASSOC);
@@ -172,11 +162,8 @@ switch ($action) {
         echo json_encode($filters);
         break;
 
-<<<<<<< HEAD
-    // Installations géolocalisées filtrées pour la carte
-=======
+
     //  Installations géolocalisées pour la carte
->>>>>>> Tallulah
     case 'installations_map':
         $annee = $_GET['annee'] ?? null;
         $departement = $_GET['departement'] ?? null;
@@ -191,165 +178,19 @@ switch ($action) {
             SELECT i.id, i.lat, i.`long`, i.puissance_crete, c.nom_standard AS localite
             FROM Installation i
             JOIN Communes c ON i.code_insee = c.code_insee
-<<<<<<< HEAD
-            WHERE YEAR(i.an_installation) = :annee
-              AND c.code = :departement
-=======
+
             JOIN Departement d ON c.code = d.code
             WHERE i.an_installation = :annee
               AND d.code = :departement
->>>>>>> Tallulah
               AND i.lat IS NOT NULL AND i.`long` IS NOT NULL
         ");
         $stmt->execute(['annee' => $annee, 'departement' => $departement]);
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
-<<<<<<< HEAD
-        //---------------------------PAGE RECHERCHE-----------------------------------
-    case 'marques_onduleurs'://20 marques d'onduleurs
-        $stmt = $pdo->query("
-            SELECT DISTINCT nom 
-            FROM Marque_onduleur
-            ORDER BY RAND()
-            LIMIT 20
-        ");
-        echo json_encode(['marques_onduleurs' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
-        break;
 
-    case 'marques_panneaux'://20 marques de panneaux
-        $stmt = $pdo->query("
-            SELECT DISTINCT nom 
-            FROM Marque_panneau
-            ORDER BY RAND()
-            LIMIT 20
-        ");
-        echo json_encode(['marques_panneaux' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
-        break;
-
-    case 'departements_random'://20 departements
-        $stmt = $pdo->query("
-            SELECT DISTINCT code, nom
-            FROM Departement
-            ORDER BY RAND()
-            LIMIT 20
-        ");
-        echo json_encode(['departements' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
-        break;
-    
-    case 'recherche_installations':
-            $marque_onduleur = $_GET['marque_onduleur'] ?? null;
-            $marque_panneau = $_GET['marque_panneau'] ?? null;
-            $departement = $_GET['departement'] ?? null;
-            $nombre = $_GET['nombre'] ?? 50;
-            $position= ((int)$_GET['position']*(int)$nombre) ?? 0;
-
-            // Construction de la requête avec les filtres
-            $sql = "
-                SELECT 
-                    i.id,
-                    i.puissance_crete,
-                    c.nom_standard AS localite,
-                    d.nom AS departement,
-                    mo.nom AS marque_onduleur,
-                    mp.nom AS marque_panneau
-                FROM Installation i
-                JOIN Communes c ON i.code_insee = c.code_insee
-                JOIN Departement d ON c.code = d.code
-                JOIN Onduleur o ON i.id_onduleur = o.id_onduleur
-                JOIN Marque_onduleur mo ON o.nom_Marque_onduleur = mo.nom
-                JOIN Panneau p ON i.id_panneau = p.id_panneau
-                JOIN Marque_panneau mp ON p.nom = mp.nom
-                WHERE 1=1
-            ";
-
-            // Ajout des filtres selon les paramètres reçus
-        if ($marque_onduleur!=null) {
-            $sql .= " AND mo.nom = :marque_onduleur ";
-        }
-
-        if ($marque_panneau!=null) {
-            $sql .= " AND mp.nom = :marque_panneau ";
-            }
-
-        if ($departement!=null) {
-            $sql .= " AND d.nom = :departement ";
-        }
-
-            $sql .= "ORDER BY i.an_installation DESC LIMIT :nombre OFFSET :position;";
-
-            $stmt = $pdo->prepare($sql);
-
-        if ($marque_onduleur!=null) {
-            $stmt->bindParam(':marque_onduleur', $marque_onduleur);
-        }
-
-        if ($marque_panneau!=null) {
-            $stmt->bindParam(':marque_panneau', $marque_panneau);
-        }
-
-
-        if ($departement!=null) {
-            $stmt->bindParam(':departement', $departement);
-        }
-
-        $stmt->bindParam(':position', $position, PDO::PARAM_INT);
-        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_INT);
-
-
-
-            $stmt->execute();
-
-
-
-            echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-            break;
-
-    // Toutes les installations (ex : page accueil)
-    case 'all':
-    default:
-
-
-    $stmt = $pdo->query("
-=======
-    //  Détail d'une installation
-    case 'installation_detail':
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            http_response_code(400);
-            echo json_encode(["error" => "Paramètre 'id' requis."]);
-            exit;
-        }
-
-        $stmt = $pdo->prepare("
-            SELECT 
-                i.*, 
-                c.nom_standard AS localite,
-                d.nom AS departement,
-                r.nom AS region,
-                inst.nom AS installateur,
-                pan.nom AS marque_panneau,
-                pan.nom_modele AS modele_panneau,
-                ond.nom AS modele_onduleur,
-                ond.nom_Marque_onduleur AS marque_onduleur
-            FROM Installation i
-            LEFT JOIN Communes c ON i.code_insee = c.code_insee
-            LEFT JOIN Departement d ON c.code = d.code
-            LEFT JOIN Region r ON d.code_Region = r.code
-            LEFT JOIN Installateur inst ON i.id_Installateur = inst.id
-            LEFT JOIN Panneau pan ON i.id_panneau = pan.id_panneau
-            LEFT JOIN Onduleur ond ON i.id_onduleur = ond.id_onduleur
-            WHERE i.id = :id
-        ");
-        $stmt->execute(['id' => $id]);
-        echo json_encode($stmt->fetch(PDO::FETCH_ASSOC));
-        break;
-
-
-
-
-    //---------------------------PAGE RECHERCHE-----------------------------------
-    // 🔹 FILTRES DYNAMIQUES SIMPLIFIÉS
+//---------------------------PAGE RECHERCHE-----------------------------------
+    //  FILTRES DYNAMIQUES SIMPLIFIÉS
     
     // Marques d'onduleurs disponibles selon les autres filtres
     case 'marques_onduleurs':
@@ -547,26 +388,144 @@ switch ($action) {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
-    //---------------------------PAGE ACCUEIL-----------------------------------
-    // Toutes les installations (page accueil)
+
+
+
+
+
+
+    //  Détail d'une installation
+
+    case 'installation_detail':
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            http_response_code(400);
+            echo json_encode(["error" => "Paramètre 'id' requis."]);
+            exit;
+        }
+
+        $stmt = $pdo->prepare("
+            SELECT 
+                i.*, 
+                c.nom_standard AS localite,
+                d.nom AS departement,
+                r.nom AS region,
+                inst.nom AS installateur,
+                pan.nom AS marque_panneau,
+                pan.nom_modele AS modele_panneau,
+                ond.nom AS modele_onduleur,
+                ond.nom_Marque_onduleur AS marque_onduleur
+            FROM Installation i
+            LEFT JOIN Communes c ON i.code_insee = c.code_insee
+            LEFT JOIN Departement d ON c.code = d.code
+            LEFT JOIN Region r ON d.code_Region = r.code
+            LEFT JOIN Installateur inst ON i.id_Installateur = inst.id
+            LEFT JOIN Panneau pan ON i.id_panneau = pan.id_panneau
+            LEFT JOIN Onduleur ond ON i.id_onduleur = ond.id_onduleur
+            WHERE i.id = :id
+        ");
+        $stmt->execute(['id' => $id]);
+        echo json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+        break;
+
+
+
+
+
+
+
+
+
+    case 'communes_list':
+        // Liste des communes pour l'autocomplétion
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom_standard 
+            FROM Communes 
+            ORDER BY nom_standard
+            LIMIT 1000
+        ");
+        echo json_encode(['communes' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+
+
+    // PAGE MODIFICATION
+    case 'regions_list':
+        // Liste des régions
+        $stmt = $pdo->query("
+            SELECT DISTINCT code, nom 
+            FROM Region
+            ORDER BY nom
+        ");
+        echo json_encode(['regions' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'departements_list':
+        // Liste des départements (alias pour departements_random)
+        $stmt = $pdo->query("
+            SELECT DISTINCT code, nom
+            FROM Departement
+            ORDER BY nom
+        ");
+        echo json_encode(['departements' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'marques_panneaux':
+        // Correction du nom de la propriété de retour
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_panneau
+            ORDER BY nom
+        ");
+        echo json_encode(['marques_panneaux' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'modeles_panneaux':
+        // Liste des modèles de panneaux
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom_modele 
+            FROM Modele_panneau
+            ORDER BY nom_modele
+        ");
+        echo json_encode(['modeles' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'marques_onduleurs':
+        // Correction du nom de la propriété de retour
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_onduleur
+            ORDER BY nom
+        ");
+        echo json_encode(['marques_onduleurs' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'modeles_onduleurs':
+        // Liste des modèles d'onduleurs
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Modele_onduleur
+            ORDER BY nom
+        ");
+        echo json_encode(['modeles' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+
+
+            // Toutes les installations
     case 'all':
     default:
         $stmt = $pdo->query("
->>>>>>> Tallulah
-            SELECT i.id, i.an_installation, i.puissance_crete, c.nom_standard AS localite
+            SELECT i.id, i.an_installation, i.nb_panneaux, i.surface, i.puissance_crete, c.nom_standard AS localite
             FROM Installation i
             JOIN Communes c ON i.code_insee = c.code_insee
             ORDER BY i.an_installation DESC
             LIMIT 100
         ");
-<<<<<<< HEAD
     echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
 
     break;
 
+
 }
-=======
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
-}
->>>>>>> Tallulah
+

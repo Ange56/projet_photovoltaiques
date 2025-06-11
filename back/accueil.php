@@ -1,16 +1,15 @@
 <?php
-// accueil_admin.php
 session_start();
 
-// Vérification de l'authentification admin (à adapter selon votre système)
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    // Pour la démo, on simule un admin connecté
-    $_SESSION['admin_logged_in'] = true;
-    $_SESSION['admin_name'] = 'Admin';
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: connexion.php');
+    exit;
 }
 
-$admin_name = $_SESSION['admin_name'] ?? 'Admin';
+$nom_utilisateur = $_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom'];
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -22,11 +21,12 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
         <title>Pannoneau - Administration</title>
         <link rel="stylesheet" href="../front/css/accueil_admin.css">
-        <script src="accueil.js"></script>
+        <link rel="icon" type="image/png" href="../images/logo.png">
+
+        <script src="../js/accueil_admin.js"></script>
 
     </head>
     <body>
-        <!-- Remplacer la section header actuelle par : -->
         <header>
             <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
                 <!-- Gauche : logo + titre -->
@@ -46,36 +46,15 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
 
                 <!-- Droite : info admin (ajouté pour garder l'info admin) -->
                 <div class="admin-info">
-                    <span>Admin - <?php echo htmlspecialchars($admin_name); ?></span>
-                    <div class="user-avatar"><?php echo strtoupper(substr($admin_name, 0, 1)); ?></div>
+                    <span>Admin - <?php echo htmlspecialchars($nom_utilisateur); ?></span>
+                    <div class="user-avatar"><?php echo strtoupper(substr($nom_utilisateur, 0, 1)); ?></div>
+                    <a href="logout.php" class="btn btn-sm btn-outline-light ms-2">Déconnexion</a>
+
                 </div>
             </nav>
         </header>
 
-
-
-        
-
         <div class="main-container">
-            <!-- <div class="dashboard-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalInstallations">0</div>
-                    <div class="stat-label">Installations totales</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalPanels">0</div>
-                    <div class="stat-label">Panneaux installés</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalPower">0</div>
-                    <div class="stat-label">kW de puissance</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalSurface">0</div>
-                    <div class="stat-label">m² de surface</div>
-                </div>
-            </div> -->
-
             <div class="content-section">
                 <div class="section-header">
                     <h2 class="section-title">
@@ -98,7 +77,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
                                 <th>Date d'installation</th>
                                 <th>Nombre de panneaux</th>
                                 <th>Surface (m²)</th>
-                                <th>Puissance crête (kW)</th>
+                                <th>Puissance crête (W)</th>
                                 <th>Localisation</th>
                                 <th>Actions</th>
                             </tr>
@@ -110,50 +89,234 @@ $admin_name = $_SESSION['admin_name'] ?? 'Admin';
                 </div>
 
                 <div id="emptyState" class="empty-state" style="display: none;">
-                    <div class="empty-icon">📋</div>
                     <h3>Aucune installation enregistrée</h3>
                     <p>Commencez par ajouter votre première installation de panneaux solaires</p>
                 </div>
             </div>
         </div>
 
-        <!-- Modal pour ajouter/modifier une installation -->
+
         <div id="installationModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 id="modalTitle">Nouvelle installation</h2>
-                    <span class="close" id="btnCloseModal">&times;</span>
+                    <button class="close" id="btnCloseModal">&times;</button>
                 </div>
+                
                 <form id="installationForm">
-                    <input type="hidden" id="installationId" value="">
-                    <div class="form-group">
-                        <label for="installDate">Date d'installation</label>
-                        <input type="date" id="installDate" required>
+                    <div class="modal-body">
+                        <input type="hidden" id="installationId" value="">
+                        
+                        <!-- Section Installation -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <span class="section-icon">🔧</span>
+                                Informations générales de l'installation
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="installMonth">Mois d'installation <span class="required">*</span></label>
+                                    <select id="installMonth" required>
+                                        <option value="">Sélectionner un mois</option>
+                                        <option value="1">Janvier</option>
+                                        <option value="2">Février</option>
+                                        <option value="3">Mars</option>
+                                        <option value="4">Avril</option>
+                                        <option value="5">Mai</option>
+                                        <option value="6">Juin</option>
+                                        <option value="7">Juillet</option>
+                                        <option value="8">Août</option>
+                                        <option value="9">Septembre</option>
+                                        <option value="10">Octobre</option>
+                                        <option value="11">Novembre</option>
+                                        <option value="12">Décembre</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="installYear">Année d'installation <span class="required">*</span></label>
+                                    <input type="number" id="installYear" min="2000" max="2030" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="surface">Surface (m²) <span class="required">*</span></label>
+                                    <input type="number" id="surface" min="0" step="0.1" required>
+                                    <div class="help-text">Surface totale occupée par les panneaux</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="puissanceCrete">Puissance crête (W) <span class="required">*</span></label>
+                                    <input type="number" id="puissanceCrete" min="0" step="0.1" required>
+                                    <div class="help-text">Puissance maximale de l'installation</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section Placement -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <span class="section-icon">📐</span>
+                                Placement et orientation
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="orientation">Orientation (°) <span class="required">*</span></label>
+                                    <input type="number" id="orientation" min="0" max="360" required>
+                                    <div class="help-text">Nord = 0°, Est = 90°, Sud = 180° , Ouest = 270°</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="orientationOptimum">Orientation optimum (°)</label>
+                                    <input type="number" id="orientationOptimum" min="0" max="360">
+                                    <div class="help-text">Orientation idéale calculée</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="pente">Pente (°) <span class="required">*</span></label>
+                                    <input type="number" id="pente" min="0" max="90" required>
+                                    <div class="help-text">Inclinaison des panneaux</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="penteOptimum">Pente optimum (°)</label>
+                                    <input type="number" id="penteOptimum" min="0" max="90">
+                                    <div class="help-text">Inclinaison idéale calculée</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="installateur">Installateur</label>
+                                    <input type="text" id="installateur" placeholder="Nom de l'entreprise installatrice">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="productionPvgis">Production PVGIS (kWh/an)</label>
+                                    <input type="number" id="productionPvgis" min="0">
+                                    <div class="help-text">Production estimée par PVGIS</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section Adresse -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <span class="section-icon">📍</span>
+                                Adresse et localisation
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="latitude">Latitude</label>
+                                    <input type="number" id="latitude" step="0.000001" placeholder="46.123456">
+                                    <div class="help-text">Coordonnée GPS (décimal)</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="longitude">Longitude</label>
+                                    <input type="number" id="longitude" step="0.000001" placeholder="2.123456">
+                                    <div class="help-text">Coordonnée GPS (décimal)</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="localite">Localité <span class="required">*</span></label>
+                                    <input type="text" id="localite" required list="communes-list">
+                                    <div class="help-text">Nom de la commune</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="departement">Département</label>
+                                    <input type="text" id="departement" required>
+                                    <!-- <div class="help-text">Rempli automatiquement</div> -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="codePostal">Code postal</label>
+                                    <input type="text" id="codePostal" pattern="[0-9]{5}" maxlength="5">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="region">Région</label>
+                                    <input type="text" id="region" required>
+                                    <!-- <div class="help-text">Rempli automatiquement</div> -->
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="pays">Pays</label>
+                                    <input type="text" id="pays" value="France" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section Panneau -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <span class="section-icon">☀️</span>
+                                Informations panneaux
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="modeleReponse">Modèle de panneau <span class="required">*</span></label>
+                                    <input type="text" id="modeleReponse" required placeholder="Ex: Monocristallin 300W">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="marquePanneau">Marque de panneau <span class="required">*</span></label>
+                                    <input type="text" id="marquePanneau" required placeholder="Ex: SunPower, LG, Panasonic">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="nbPanneaux">Nombre de panneaux <span class="required">*</span></label>
+                                    <input type="number" id="nbPanneaux" min="1" required>
+                                    <div class="help-text">Nombre total de panneaux installés</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section Onduleur -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <span class="section-icon">⚡</span>
+                                Informations onduleur
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="modeleOnduleur">Modèle d'onduleur <span class="required">*</span></label>
+                                    <input type="text" id="modeleOnduleur" required placeholder="Ex: String 5000W">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="marqueOnduleur">Marque d'onduleur <span class="required">*</span></label>
+                                    <input type="text" id="marqueOnduleur" required placeholder="Ex: SMA, Fronius, Huawei">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="nbOnduleur">Nombre d'onduleurs <span class="required">*</span></label>
+                                    <input type="number" id="nbOnduleur" min="1" required>
+                                    <div class="help-text">Nombre d'onduleurs installés</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="panelCount">Nombre de panneaux</label>
-                        <input type="number" id="panelCount" min="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="surface">Surface (m²)</label>
-                        <input type="number" id="surface" min="0" step="0.1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="power">Puissance crête (kW)</label>
-                        <input type="number" id="power" min="0" step="0.1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Localisation</label>
-                        <input type="text" id="location" required>
-                    </div>
+                    
                     <div class="form-buttons">
                         <button type="button" class="btn-secondary" id="btnCancel">Annuler</button>
-                        <button type="submit" class="add-btn" id="btnSubmit">Ajouter</button>
+                        <button type="submit" class="add-btn" id="btnSubmit">Ajouter l'installation</button>
                     </div>
                 </form>
             </div>
         </div>
 
+        <datalist id="communes-list">
+        <!-- Options ajoutées dynamiquement -->
+        </datalist>
+        
         <!-- Messages de notification -->
         <div id="notification" class="notification">
             <span id="notificationMessage"></span>
