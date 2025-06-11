@@ -144,7 +144,7 @@ window.addEventListener("load",function(){
     info.innerText+= " "+id;
 
 
-    request("GET",'../../api/endpoints/get.php?action=installation_detail',display,id);
+    request("GET",'../api/endpoints/get.php?action=installation_detail',display,id);
 
     installationButton.onclick = function(){installationMenu.classList.toggle('d-none')};
     placementButton.onclick = function(){placementMenu.classList.toggle('d-none')};

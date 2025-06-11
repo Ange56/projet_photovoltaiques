@@ -1,0 +1,144 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: connexion.php');
+    exit;
+}
+
+$nom_utilisateur = $_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom'];
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marko+One&family=Roboto&family=Stint+Ultra+Expanded&display=swap" rel="stylesheet"><!--importation de Roboto et Lalezar-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!--importation des icones de fontawesome-->
+
+        <title>Pannoneau - Administration</title>
+        <link rel="stylesheet" href="../front/css/modification.css">
+        <link rel="icon" type="image/png" href="../images/logo.png">
+
+        <script src="../js/modification.js"></script>
+
+    </head>
+    <body>
+        <header>
+            <nav class="navbar-custom d-flex justify-content-between align-items-center px-4">
+                <!-- Gauche : logo + titre -->
+                <div class="d-flex align-items-center">
+                    <a href="accueil.php">
+                        <img src="../images/logo.png" alt="Logo" class="logo-img me-2">
+                    </a>
+                    <span class="navbar-title">Panoneau</span>
+                </div>
+
+                <!-- Centre : boutons -->
+                <div class="d-flex gap-2">
+                    <a href="accueil.php" class="nav-button active">Accueil</a>
+                    <a href="#" class="nav-button">Recherche</a>
+                    <a href="#" class="nav-button">Carte</a>
+                </div>
+
+                <!-- Droite : info admin (ajouté pour garder l'info admin) -->
+                <div class="admin-info">
+                    <span>Admin - <?php echo htmlspecialchars($nom_utilisateur); ?></span>
+                    <div class="user-avatar"><?php echo strtoupper(substr($nom_utilisateur, 0, 1)); ?></div>
+                    <a href="logout.php" class="btn btn-sm btn-outline-light ms-2">Déconnexion</a>
+
+                </div>
+            </nav>
+        </header>
+
+        <!-- Flèche de retour -->
+        <a href="accueil.php" class="back-arrow" title="Retourner à l'accueil'">
+            <img src="../images/fleche.png" alt="Retour">
+        </a>
+        <main id="page" class="container my-5">
+            <h3 id="info">Modification de l'installation: </h3>
+            <h4 id="infodoc">ID du document: </h4>
+            <br>
+            <!--Différents menus pour les détails, ouvrables et fermables avec un bouton-->
+            <button id="installationb">
+                <i class="fa-regular fa-sun"></i>
+            Installation
+            </button>
+                <br>
+            <table id="installationm">
+
+            </table>
+            <br>
+            <button id="placementb">
+                <i class="fa-solid fa-wrench"></i>
+            Placement
+            </button>
+                <br>
+            <table id="placementm">
+            </table>
+            <br>
+            <button id="adresseb">
+                <i class="fa-regular fa-map"></i>
+            Adresse
+            </button>
+                <br>
+            <table id="adressem">
+            </table>
+            <br>
+            <button id="panneaub">
+                <i class="fas fa-solar-panel me-2"></i>
+            Panneau
+            </button>
+                <br>
+            <table id="panneaum">
+            </table>
+            <br>
+            <button id="onduleurb">
+                <i class="fas fa-microchip me-2"></i>
+            Onduleur
+            </button>
+                <br>
+            <table id="onduleurm">
+            </table>
+        </main>
+        
+
+
+                <!-- Footer -->
+        <footer class="footer-custom">
+            <div class="footer-content">
+                <!-- Gauche : Noms avec LinkedIn -->
+                <div class="footer-left">
+                    <span class="footer-name">Tallulah DRENO-TABOT 
+                        <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/tallulah-dreno-tabot-9406842a3/">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                    <span class="footer-name">Angèle STUTZ 
+                        <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/ang%C3%A8le-stutz-2b76832a3/">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                    <span class="footer-name">Etienne DECAMPS 
+                        <a class="linkedin-link" target="_blank" href="#">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                </div>
+
+                <!-- Centre : Groupe -->
+                <div class="footer-center">
+                    <span class="footer-group">Groupe 11</span>
+                </div>
+
+                <!-- Droite : Année -->
+                <div class="footer-right">
+                    <span class="footer-year">2025</span>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

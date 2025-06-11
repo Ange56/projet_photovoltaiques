@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${inst.localite}</td>
             <td>${inst.departement}</td>
             <td>${inst.puissance_crete} kWc</td>
-            <td><a href="detail.php?id=${inst.id}" class="btn-custom-detail">Voir</a></td>
+            <td><a href="../html/detail.html?id=${inst.id}" class="btn-custom-detail">Voir</a></td>
         `;
         tbody.appendChild(row);
     });

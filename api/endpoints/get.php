@@ -71,6 +71,31 @@ switch ($action) {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
+
+        //---------------------------PAGE DETAIL-----------------------------------
+    // Détail d'une installation
+    case 'installation_detail':
+        $id = $_GET['id'] ?? null;
+
+        if ($id==null) {
+            http_response_code(400);
+            echo json_encode(["error" => "Paramètre 'id' requis."]);
+            exit;
+        }
+        $stmtd = $pdo->prepare("
+            SELECT i.*, o.*, p.*, c.*, d.*, r.*, o.nom AS nom_onduleur, p.nom AS nom_panneau, r.nom AS nom_region, d.nom AS nom_departement  FROM Installation i 
+        INNER JOIN Onduleur o ON o.id_onduleur= i.id_onduleur
+        INNER JOIN Panneau p ON p.id_panneau= i.id_panneau
+        INNER JOIN Communes c ON c.code_insee = i.code_insee
+        INNER JOIN Departement d ON d.code = c.code
+        INNER JOIN Region r ON r.code = d.code_Region
+        WHERE i.id=:id;
+        ");
+        $stmtd->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmtd->execute();
+        echo json_encode($stmtd->fetch(PDO::FETCH_ASSOC));
+        break;
+
     // Filtres pour le formulaire (année + département)
     case 'filters':
         $filters = [];
@@ -117,7 +142,7 @@ switch ($action) {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
-    //ç Détail d'une installation
+    // Détail d'une installation
     case 'installation_detail':
         $id = $_GET['id'] ?? null;
         if (!$id) {
@@ -220,11 +245,22 @@ switch ($action) {
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
             break;
 
-    // Toutes les installations (ex : page accueil)
+
+    case 'communes_list':
+        // Liste des communes pour l'autocomplétion
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom_standard 
+            FROM Communes 
+            ORDER BY nom_standard
+            LIMIT 1000
+        ");
+        echo json_encode(['communes' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+    // Toutes les installations
     case 'all':
     default:
         $stmt = $pdo->query("
-            SELECT i.id, i.an_installation, i.puissance_crete, c.nom_standard AS localite
+            SELECT i.id, i.an_installation, i.nb_panneaux, i.surface, i.puissance_crete, c.nom_standard AS localite
             FROM Installation i
             JOIN Communes c ON i.code_insee = c.code_insee
             ORDER BY i.an_installation DESC
@@ -233,4 +269,64 @@ switch ($action) {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
+    // PAGE MODIFICATION
+    case 'regions_list':
+        // Liste des régions
+        $stmt = $pdo->query("
+            SELECT DISTINCT code, nom 
+            FROM Region
+            ORDER BY nom
+        ");
+        echo json_encode(['regions' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'departements_list':
+        // Liste des départements (alias pour departements_random)
+        $stmt = $pdo->query("
+            SELECT DISTINCT code, nom
+            FROM Departement
+            ORDER BY nom
+        ");
+        echo json_encode(['departements' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'marques_panneaux':
+        // Correction du nom de la propriété de retour
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_panneau
+            ORDER BY nom
+        ");
+        echo json_encode(['marques_panneaux' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'modeles_panneaux':
+        // Liste des modèles de panneaux
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom_modele 
+            FROM Modele_panneau
+            ORDER BY nom_modele
+        ");
+        echo json_encode(['modeles' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'marques_onduleurs':
+        // Correction du nom de la propriété de retour
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Marque_onduleur
+            ORDER BY nom
+        ");
+        echo json_encode(['marques_onduleurs' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
+
+    case 'modeles_onduleurs':
+        // Liste des modèles d'onduleurs
+        $stmt = $pdo->query("
+            SELECT DISTINCT nom 
+            FROM Modele_onduleur
+            ORDER BY nom
+        ");
+        echo json_encode(['modeles' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+        break;
 }
