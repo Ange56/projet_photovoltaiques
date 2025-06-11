@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const table = document.getElementById('resultatsTable');
     const tbody = table.querySelector('tbody');
 
-    // 🔹 Fonction utilitaire de fetch
+    //   Fonction utilitaire de fetch
     async function fetchData(url) {
         console.log("Fetching URL:", url);
         try {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 🔹 Charger les filtres (marques & départements)
+    //  Charger les filtres (marques & départements)
     async function loadFiltres() {
         // Chargement des marques d'onduleurs
         const onduleurs = await fetchData('../../api/endpoints/get.php?action=marques_onduleurs');
