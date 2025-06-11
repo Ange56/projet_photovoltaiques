@@ -68,9 +68,9 @@ Fonctionnalités :
 ## Comment utiliser
 
 1. Accédez à l’URL de la machine virtuelle dans votre navigateur.
-2. Vous arrivez sur la page d’accueil publique.
+2. Vous arrivez sur la page d’accueil côté client.
 3. Naviguez via les boutons du menu.
-4. Pour accéder à l’administration, connectez-vous via la page de connexion avec vos identifiants.
+4. Pour accéder au côté admin, connectez-vous via la page de connexion avec les identifiants suivants : dupont@mail.com ; monMDP123!
 
 ---
 
