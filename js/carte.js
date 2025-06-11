@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-    //  Quand une année est sélectionnée → charger les départements
+    // 🔹 Quand une année est sélectionnée → charger les départements
     anneeSelect.addEventListener('change', () => {
         const selectedYear = anneeSelect.value;
         departementSelect.innerHTML = '<option disabled selected>Chargement...</option>';
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Soumission du formulaire → charger les points sur la carte
+    // 🔹 Soumission du formulaire → charger les points sur la carte
     form.addEventListener('submit', e => {
         e.preventDefault();
         const annee = anneeSelect.value;
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const marker = L.marker([install.lat, install.long]).addTo(markersLayer);
                     marker.bindPopup(`
                         <strong>${install.localite}</strong><br>
-                        Puissance : ${install.puissance_crete} W<br>
-                        <a href="../detail.html?nid=${install.id}">Voir détail</a>
+                        Puissance : ${install.puissance_crete} kWc<br>
+                        <a href="detail.php?id=${install.id}">Voir détail</a>
                     `);
                 });
 
